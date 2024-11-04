@@ -1,27 +1,31 @@
-# Beatloop
+# Projeto - Beatloop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 18.1.2.
 
-## Development server
+## Descrição
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Beatloop** é um site de venda de sample packs, onde os usuários podem explorar, ouvir prévias e adquirir diversos pacotes de samples para uso em produções musicais.
 
-## Code scaffolding
+## Servidor de Desenvolvimento
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Execute `ng serve` para iniciar o servidor de desenvolvimento. Acesse `http://localhost:4200/` no navegador. A aplicação recarregará automaticamente ao modificar qualquer arquivo de código-fonte.
+
+## Criação de Código
+
+Para gerar um novo componente, utilize `ng generate component nome-do-componente`. Você também pode gerar outras entidades, como diretivas, pipes, serviços, classes, guards, interfaces, enums ou módulos, usando `ng generate`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Execute `ng build` para compilar o projeto. Os arquivos gerados serão armazenados no diretório `dist/`.
 
-## Running unit tests
+## Execução de Testes Unitários
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Execute `ng test` para realizar os testes unitários com o [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Execução de Testes End-to-End
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Execute `ng e2e` para realizar os testes end-to-end com uma plataforma de sua escolha. Para usar este comando, é necessário primeiro adicionar um pacote que implemente funcionalidades de testes end-to-end.
 
-## Further help
+## Ajuda Adicional
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para mais informações sobre o Angular CLI, use `ng help` ou consulte a [página de referência e visão geral do Angular CLI](https://angular.dev/tools/cli).

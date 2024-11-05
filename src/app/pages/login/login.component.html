@@ -12,7 +12,15 @@
 
     <div class="login">
 
-      <div class="google"></div>
+      <div class="google">
+        <asl-google-signin-button class="custom-google-button"  type="standard"
+        shape="rectangular"
+        theme="outline"
+        text="continue_with"
+        size="large"
+        logo_alignment="left"
+        [width]="280"></asl-google-signin-button>
+      </div>
       <div class="or"></div>
 
 
@@ -39,6 +47,12 @@
       </div>
 
 
+      <div class="terms">
+        By continuing, you agree to Beatloop's
+        <a href="">Terms</a> of Use and <a href="">Privacy Policy.</a>
+        <span>
+        </span>
+      </div>
     </div>
   </div>
 </div>

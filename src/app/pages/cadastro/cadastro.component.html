@@ -1,0 +1,117 @@
+<div class="container-signup">
+  <div class="content-signup">
+
+    <div class="logo">
+      <img src="/img/logo.png" alt="BeatLoop Logo">
+    </div>
+
+    <div class="texto">
+      <h3 class="title">Create your free account</h3>
+      <span class="subtitle">You’re one step closer to the best music you’ve ever made.</span>
+    </div>
+
+
+    <div class="signup">
+
+      <div class="login-social">
+        <img src="/img/google_icon.png" alt="Google">
+        Continue with Google
+        <span></span>
+      </div>
+      <div class="login-social">
+        <img src="/img/facebook_icon.svg" alt="Facebook">
+        Continue with Facebook
+        <span></span>
+      </div>
+      <div class="login-social">
+        <img src="/img/apple_icon.png" alt="Apple">
+        Continue with Apple
+        <span></span>
+      </div>
+      <div class="or">
+        <div class="linha"></div>
+        or
+        <div class="linha"></div>
+      </div>
+
+
+      <form>
+        <div class="form-group">
+          <input type="email" placeholder="E-mail address*">
+        </div>
+        <div class="form-group">
+          <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Password*" [(ngModel)]="password"
+              (input)="onPasswordChange($event)" name="password">
+            <i class="password-toggle fa-regular" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+              (click)="togglePassword()">
+            </i>
+          </div>
+          <div class="password-strength" [class.active]="password.length > 0">
+            <div class="strength-bars">
+              <div class="bar"
+                [ngClass]="{
+                  'weak': passwordStrengthClass === 'weak',
+                  'medium': passwordStrengthClass === 'medium',
+                  'strong': passwordStrengthClass === 'strong'
+                }">
+              </div>
+              <div class="bar"
+                [ngClass]="{
+                  'medium': passwordStrengthClass === 'medium',
+                  'strong': passwordStrengthClass === 'strong'
+                }">
+              </div>
+              <div class="bar"
+                [ngClass]="{
+                  'strong': passwordStrengthClass === 'strong'
+                }">
+              </div>
+            </div>
+            <span class="strength-text" [ngClass]="passwordStrengthClass">
+              {{ passwordStrengthText }}
+            </span>
+            <div class="criteria-list" *ngIf="password.length > 0">
+              <div class="criteria-item" [class.valid]="passwordCriteria.minLength">
+                <i class="fas fa-check"></i>
+                <span>Mínimo de 8 caracteres</span>
+              </div>
+              <div class="criteria-item" [class.valid]="passwordCriteria.hasUpperCase">
+                <i class="fas fa-check"></i>
+                <span>Uma letra maiúscula</span>
+              </div>
+              <div class="criteria-item" [class.valid]="passwordCriteria.hasLowerCase">
+                <i class="fas fa-check"></i>
+                <span>Uma letra minúscula</span>
+              </div>
+              <div class="criteria-item" [class.valid]="passwordCriteria.hasNumber">
+                <i class="fas fa-check"></i>
+                <span>Um número</span>
+              </div>
+              <div class="criteria-item" [class.valid]="passwordCriteria.hasSpecialChar">
+                <i class="fas fa-check"></i>
+                <span>Um caractere especial</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="dados">
+        <button>Continue</button>
+
+        <div class="create-account">
+          <span>Don't have an account? <a href="/login">Log In</a></span>
+        </div>
+      </div>
+
+
+      <div class="terms">
+        By continuing, you agree to Beatloop's
+        <a href="">Terms</a> of Use and <a href="">Privacy Policy.</a>
+        <span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

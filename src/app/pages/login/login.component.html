@@ -12,16 +12,26 @@
 
     <div class="login">
 
-      <div class="google">
-        <asl-google-signin-button class="custom-google-button"  type="standard"
-        shape="rectangular"
-        theme="outline"
-        text="continue_with"
-        size="large"
-        logo_alignment="left"
-        [width]="280"></asl-google-signin-button>
+      <div class="login-social">
+        <img src="/img/google_icon.png" alt="Google">
+        Continue with Google
+        <span></span>
       </div>
-      <div class="or"></div>
+      <div class="login-social">
+        <img src="/img/facebook_icon.svg" alt="Facebook">
+        Continue with Facebook
+        <span></span>
+      </div>
+      <div class="login-social">
+        <img src="/img/apple_icon.png" alt="Apple">
+        Continue with Apple
+        <span></span>
+      </div>
+      <div class="or">
+        <div class="linha"></div>
+        or
+        <div class="linha"></div>
+      </div>
 
 
       <form>
@@ -30,7 +40,12 @@
         </div>
         <div class="form-group">
 
-          <input type="password" placeholder="Password*">
+          <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Password*">
+            <i class="password-toggle fa-regular" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+              (click)="togglePassword()">
+            </i>
+          </div>
         </div>
       </form>
 
@@ -42,7 +57,7 @@
         <button>Continue</button>
 
         <div class="create-account">
-          <span>Don't have an account? <a href="#">Sign up</a></span>
+          <span>Don't have an account? <a href="/signup">Sign up</a></span>
         </div>
       </div>
 

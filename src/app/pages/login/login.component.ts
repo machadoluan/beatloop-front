@@ -1,21 +1,30 @@
-import { GoogleSigninButtonModule, SocialAuthService, SocialLoginModule } from '@abacritt/angularx-social-login';
-import { isPlatformBrowser } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input'
-
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, GoogleSigninButtonModule],
+  imports: [CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent  {
-  hidePassword = true;
+export class LoginComponent {
+  
+  showPassword = false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
 
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  login() {
+    this.authService.login();
+  }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Router } from '@angular/router';
 import { authConfig } from '../app.config';
+import { HttpClient } from '@angular/common/http';
 
 interface UserInfo {
   sub: string;
@@ -17,10 +18,13 @@ interface UserInfo {
 export class AuthService {
   constructor(
     private oauthService: OAuthService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.configureOAuth();
   }
+
+  private apiUrl = 'http://localhost:3000/api/v1/auth'
 
   private configureOAuth() {
     this.oauthService.configure(authConfig);
@@ -78,4 +82,17 @@ export class AuthService {
   getAccessToken(): string | null {
     return localStorage.getItem('access_token');
   }
+
+  entrar(dadosLogin: any) {
+    return this.http.post(`${this.apiUrl}/login`, dadosLogin);
+  }
+
+  userLogin(dadosLogin: any) {
+    return this.http.post(`${this.apiUrl}/login`, dadosLogin);
+  }
+
+  cadastro(dadosCadastro: any) {
+    return this.http.post(`${this.apiUrl}/register`, dadosCadastro);
+  }
+
 }

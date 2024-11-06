@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
   styleUrl: './cadastro.component.scss'
 })
 export class CadastroComponent {
+  loginSocial = true;
   showPassword = false;
   password = '';
   passwordStrengthClass = '';
@@ -85,5 +86,9 @@ export class CadastroComponent {
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  toggleSocial(){
+    this.loginSocial = !this.loginSocial
   }
 }

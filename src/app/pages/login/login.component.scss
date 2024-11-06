@@ -1,13 +1,14 @@
 @import '../../../../public/variables.scss';
 
 .container-login {
-  width: 100vw;
-  height: 100vh;
+  min-width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: $secondary-color;
+  padding: 20px 0;
 
   .content-login {
     width: 280px;
@@ -41,28 +42,39 @@
       gap: 1rem;
 
       .login-social {
-        border: 1px solid white;
-        cursor: pointer;
         width: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        padding: 12px 15px;
-        border-radius: 10px;
-        gap: 10px;
-        color: white;
-        font-size: 14px;
-        transition: all 0.3s ease;
+        gap: 1rem;
+        margin-top: 40px;
 
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
 
-        img {
-          width: 20px;
-          height: auto;
+        .social {
+          border: 1px solid white;
+          cursor: pointer;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 12px 15px;
+          border-radius: 10px;
+          gap: 20px;
+          color: white;
+          font-size: 14px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+
+          img {
+            width: 20px;
+            height: auto;
+          }
         }
       }
+
+
 
       .or {
         width: 100%;
@@ -79,66 +91,92 @@
         }
       }
 
-      form {
+      .email {
+        margin-top: 30px;
         display: flex;
+        gap: 20px;
         flex-direction: column;
-        gap: 1rem;
 
-        .form-group {
+        .voltar {
+          cursor: pointer;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          gap: 0.5rem;
 
-          input {
-            width: 280px;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgb(255, 255, 255);
-            background-color: transparent;
-            color: white;
-            outline: none;
-
-            &::placeholder {
-              color: white;
-            }
-
-            &:focus {
-              background-color: rgba(255, 255, 255, 0.056);
-            }
+          i {
+            font-size: 12px;
+            color: $primary-color;
           }
 
+          span {
+            font-size: 16px;
+            color: $primary-color;
 
-          .password-input {
-            position: relative;
-            width: 100%;
+          }
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          .form-group {
 
             input {
+              width: 280px;
+              padding: 15px;
+              border-radius: 10px;
+              border: 1px solid rgb(255, 255, 255);
+              background-color: transparent;
+              color: white;
+              outline: none;
+
+              &::placeholder {
+                color: white;
+              }
+
+              &:focus {
+                background-color: rgba(255, 255, 255, 0.056);
+              }
+            }
+
+
+            .password-input {
+              position: relative;
               width: 100%;
+
+              input {
+                width: 100%;
+              }
+
+              .password-toggle {
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                color: #fff;
+              }
             }
 
-            .password-toggle {
-              position: absolute;
-              right: 12px;
-              top: 50%;
-              transform: translateY(-50%);
-              cursor: pointer;
-              color: #fff;
-            }
+
           }
-
-
         }
-      }
 
-      .dados {
-        display: flex;
-        width: 100%;
+        .dados {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          justify-content: center;
+          gap: 20px;
 
-        flex-direction: column;
-        justify-content: center;
-        gap: 20px;
-
-        .forgot-password {
-          a {
-            font-size: 12px;
-            color: rgba(33, 77, 255, 1);
+          .forgot-password {
+            a {
+              font-size: 12px;
+              color: rgba(33, 77, 255, 1);
+            }
           }
         }
 
@@ -152,36 +190,58 @@
           font-weight: 600;
           cursor: pointer;
         }
+      }
 
-        .create-account {
-          span {
-            font-size: 12px;
-            color: white;
+      .create-account {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-            a {
-              color: rgba(33, 77, 255, 1);
-            }
+        span {
+          font-size: 12px;
+          color: white;
+
+          a {
+            color: rgba(33, 77, 255, 1);
           }
+
         }
 
+        .linha {
+          width: 100%;
+          height: 1px;
+          background-color: white;
+          margin: 20px 0;
+        }
 
       }
 
       .terms {
-        position: absolute;
-        bottom: 50px;
         text-align: center;
         font-size: 12px;
         color: white;
         width: 250px;
+        margin-top: 40px;
 
         a {
           color: rgba(33, 77, 255, 1);
-          ;
         }
       }
     }
   }
 
 
+}
+
+
+
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-none {
+  display: none !important;
 }

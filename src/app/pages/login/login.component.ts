@@ -11,8 +11,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  
+
   showPassword = false;
+  loginSocial = true;
 
   constructor(
     private authService: AuthService,
@@ -22,6 +23,10 @@ export class LoginComponent {
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  toggleSocial(){
+    this.loginSocial = !this.loginSocial
   }
 
   login() {

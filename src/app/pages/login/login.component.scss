@@ -189,6 +189,11 @@
           color: white;
           font-weight: 600;
           cursor: pointer;
+
+          &:disabled {
+            background-color: rgba(1, 51, 255, 0.5);
+            cursor: not-allowed;
+          }
         }
       }
 
@@ -236,12 +241,77 @@
 }
 
 
-
-
+// CONFIGURAÇÕES EXTRAS.
 .d-flex {
   display: flex !important;
 }
 
 .d-none {
   display: none !important;
+}
+
+/* Fade In */
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Fade Out */
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+
+
+// Dispotiveis para mobile.
+@media screen and (max-width: 305px) {
+  .container-login {
+    .content-login {
+
+      .texto {
+        h3 {
+          font-size: 18px;
+        }
+      }
+
+      .login {
+        width: 220px;
+
+        .login-social {
+          .social {
+            gap: 10px;
+            font-size: 12px;
+          }
+        }
+
+        // Também ajuste os elementos filhos que têm width definida
+        .email form .form-group input {
+          width: 220px;
+        }
+      }
+    }
+  }
 }

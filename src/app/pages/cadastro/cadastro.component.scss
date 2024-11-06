@@ -172,6 +172,97 @@
               }
             }
 
+            .password-strength {
+              margin-top: 15px;
+              opacity: 0;
+              transform: translateY(-10px);
+              transition: all 0.3s ease;
+              visibility: hidden;
+              max-height: 0;
+              overflow: hidden;
+
+              &.active {
+                opacity: 1;
+                transform: translateY(0);
+                visibility: visible;
+                max-height: 200px;
+              }
+
+              .strength-bars {
+                display: flex;
+                gap: 4px;
+                margin-bottom: 4px;
+
+                .bar {
+                  height: 4px;
+                  flex: 1;
+                  background-color: #e0e0e0;
+                  border-radius: 2px;
+                  transition: all 0.3s ease;
+
+                  &.weak {
+                    background-color: #ff4444;
+                  }
+
+                  &.medium {
+                    background-color: #ffbb33;
+                  }
+
+                  &.strong {
+                    background-color: #00C851;
+                  }
+                }
+              }
+
+              .strength-text {
+                font-size: 14px;
+
+                &.weak {
+                  color: #ff4444;
+                }
+
+                &.medium {
+                  color: #ffbb33;
+                }
+
+                &.strong {
+                  color: #00C851;
+                }
+              }
+            }
+
+            .criteria-list {
+              margin: 8px 0;
+              font-size: 13px;
+              color: #fff;
+              border: 1px solid white;
+              padding: 15px;
+              border-radius: 10px;
+
+              .criteria-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 6px;
+                transition: all 0.3s ease;
+
+                i {
+                  font-size: 12px;
+                  opacity: 0;
+                  color: #00C851;
+                  transition: all 0.3s ease;
+                }
+
+                &.valid {
+                  color: #00C851;
+
+                  i {
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+
 
           }
         }
@@ -200,10 +291,19 @@
           color: white;
           font-weight: 600;
           cursor: pointer;
+
+          &:disabled {
+            background-color: rgba(1, 51, 255, 0.5);
+            cursor: not-allowed;
+          }
         }
+
+        .password-mismatch {
+          font-size: 12px;
+          color: #ff4444;
+        }
+
       }
-
-
 
       .create-account {
         width: 100%;
@@ -248,102 +348,80 @@
 
 }
 
-.password-strength {
-  margin-top: 15px;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  visibility: hidden;
-  max-height: 0;
-  overflow: hidden;
-
-  &.active {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-    max-height: 200px;
-  }
-
-  .strength-bars {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 4px;
-
-    .bar {
-      height: 4px;
-      flex: 1;
-      background-color: #e0e0e0;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-
-      &.weak {
-        background-color: #ff4444;
-      }
-
-      &.medium {
-        background-color: #ffbb33;
-      }
-
-      &.strong {
-        background-color: #00C851;
-      }
-    }
-  }
-
-  .strength-text {
-    font-size: 14px;
-
-    &.weak {
-      color: #ff4444;
-    }
-
-    &.medium {
-      color: #ffbb33;
-    }
-
-    &.strong {
-      color: #00C851;
-    }
-  }
-}
-
-.criteria-list {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #fff;
-  border: 1px solid white;
-  padding: 15px;
-  border-radius: 10px;
-
-  .criteria-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-    transition: all 0.3s ease;
-
-    i {
-      font-size: 12px;
-      opacity: 0;
-      color: #00C851;
-      transition: all 0.3s ease;
-    }
-
-    &.valid {
-      color: #00C851;
-
-      i {
-        opacity: 1;
-      }
-    }
-  }
-}
-
-
-.d-flex{
+// CONFIGURAÇÕES EXTRAS.
+.d-flex {
   display: flex !important;
 }
 
-.d-none{
+.d-none {
   display: none !important;
+}
+
+/* Fade In */
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Fade Out */
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+
+// Dispotiveis para mobile.
+@media screen and (max-width: 305px) {
+  .container-signup {
+    .content-signup {
+
+      .texto {
+        h3 {
+          font-size: 18px;
+        }
+
+        .subtitle {
+          font-size: 10px;
+        }
+      }
+
+      .signup {
+        width: 220px;
+
+        .login-social {
+          .social {
+            gap: 10px;
+            font-size: 12px;
+          }
+        }
+
+        // Também ajuste os elementos filhos que têm width definida
+        .email form .form-group input {
+          width: 220px;
+        }
+      }
+    }
+  }
 }

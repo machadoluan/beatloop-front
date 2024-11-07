@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cadastro',
@@ -153,7 +154,7 @@ export class CadastroComponent {
   }
 
   // Alterna entre login social e formulário normal, limpando os campos de senha
- 
+
 
   // Validador personalizado para verificar se as senhas coincidem
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {

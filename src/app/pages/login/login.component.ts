@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+
+@Injectable({
+  providedIn: 'root', // Certifique-se que o AuthService é fornecido na raiz
+})
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -50,8 +54,12 @@ export class LoginComponent {
     }
   }
 
-  login() {
-    this.authService.login();
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
+  }
+
+  loginWithFacebook() {
+    this.authService.loginWithFacebook();
   }
 
   userLogin() {

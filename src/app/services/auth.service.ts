@@ -1,87 +1,80 @@
-import { Injectable } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { Router } from '@angular/router';
-import { authConfig } from '../app.config';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
-interface UserInfo {
-  sub: string;
-  email: string;
-  name: string;
-  picture: string;
-  // adicione outros campos que você precisa
-}
+const authConfigFacebook: AuthConfig = {
+  loginUrl: 'https://www.facebook.com/v11.0/dialog/oauth',
+  redirectUri: window.location.origin + '/auth/callback',
+  clientId: '1527071504600584',
+  responseType: 'token',
+  scope: 'public_profile email',
+  oidc: false,
+  strictDiscoveryDocumentValidation: false,
+  showDebugInformation: true
+};
+
+const authConfigGoogle: AuthConfig = {
+  issuer: 'https://accounts.google.com',
+  redirectUri: window.location.origin + '/auth/callback',
+  clientId: '1088646860176-dli8cvcdqm4ush61vft5i7u992bscdj5.apps.googleusercontent.com',
+  responseType: 'code',
+  scope: 'openid profile email',
+  showDebugInformation: true,
+  strictDiscoveryDocumentValidation: false
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(
-    private oauthService: OAuthService,
-    private router: Router,
-    private http: HttpClient
-  ) {
-    this.configureOAuth();
+  private currentProvider: 'FACEBOOK' | 'GOOGLE' = 'FACEBOOK';
+
+  constructor(private oauthService: OAuthService, private http: HttpClient) {
+    this.configureFacebookAuth();
   }
 
-  private apiUrl = 'http://localhost:3000/api/v1/auth'
-
-  private configureOAuth() {
-    this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocument().then(() => {
-      this.oauthService.tryLoginCodeFlow().then(() => {
-        if (this.oauthService.hasValidAccessToken()) {
-          this.saveUserInfo();
-          this.router.navigate(['/']);
-        }
-      });
-    });
-
-    this.oauthService.events.subscribe(event => {
-      if (event.type === 'token_received') {
-        this.saveUserInfo();
-        this.router.navigate(['/']);
-      }
-    });
+  private configureFacebookAuth() {
+    this.currentProvider = 'FACEBOOK';
+    this.oauthService.configure(authConfigFacebook);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
-  private saveUserInfo() {
-    this.oauthService.loadUserProfile().then((userProfile: any) => {
-      const userInfo: UserInfo = {
-        sub: userProfile.sub,
-        email: userProfile.email,
-        name: userProfile.name,
-        picture: userProfile.picture
-      };
-
-      localStorage.setItem('access_token', this.oauthService.getAccessToken());
-      localStorage.setItem('user_info', JSON.stringify(userInfo));
-    });
+  private configureGoogleAuth() {
+    this.currentProvider = 'GOOGLE';
+    this.oauthService.configure(authConfigGoogle);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
-  login() {
-    this.oauthService.initCodeFlow();
+  loginWithFacebook() {
+    this.configureFacebookAuth();
+    this.oauthService.initImplicitFlow();
+  }
+
+  loginWithGoogle() {
+    this.configureGoogleAuth();
+    this.oauthService.initLoginFlow();
   }
 
   logout() {
     this.oauthService.logOut();
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user_info');
-    this.router.navigate(['/']);
   }
 
-  isAuthenticated(): boolean {
-    return this.oauthService.hasValidAccessToken() && !!localStorage.getItem('access_token');
+  handleLoginCallback() {
+    return this.oauthService.tryLogin();
   }
 
-  getUserInfo(): UserInfo | null {
-    const userInfo = localStorage.getItem('user_info');
-    return userInfo ? JSON.parse(userInfo) : null;
+  get isLoggedIn(): boolean {
+    return this.oauthService.hasValidAccessToken();
   }
 
-  getAccessToken(): string | null {
-    return localStorage.getItem('access_token');
+  get userProfile() {
+    const claims = this.oauthService.getIdentityClaims();
+    return claims ? claims : null;
   }
+
+  private apiUrl = 'http://localhost:3000/api/v1/auth'
+
+
 
   entrar(dadosLogin: any) {
     return this.http.post(`${this.apiUrl}/login`, dadosLogin);

@@ -1,0 +1,39 @@
+@import '../../../../public/variables.scss';
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: fixed;
+  left: 0;
+  padding: 10rem 1.5rem;
+  height: 100vh;
+  border-right: 0.1rem solid #d1d1d1a2;
+  z-index: -1;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+
+
+    span {
+      width: 12rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.9rem;
+      font-weight: bold;
+      font-size: 14px;
+
+      &.active {
+        background-color: $tertiary-color;
+        color: $secondary-color;
+      }
+    }
+  }
+}

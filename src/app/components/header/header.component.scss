@@ -1,0 +1,81 @@
+@import '../../../../public/variables.scss';
+
+.container-header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: $secondary-color;
+    width: 100vw;
+    z-index: 100;
+    color: white;
+
+    .logo {
+      img {
+        width: 150px;
+        height: auto;
+      }
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .invite-friend {
+        padding: 5px 10px;
+        background-color: $primary-color;
+        border-radius: 5px;
+        color: $secondary-color;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      #help {
+        cursor: pointer;
+      }
+
+      .volume,
+      .account {
+        cursor: pointer;
+
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .menu-bar {
+    display: flex;
+    gap: 8rem;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #d1d1d1a2;
+    width: 100%;
+    z-index: 100;
+    color: $secondary-color;
+    background-color: #ffff;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .search {
+      width: 250px;
+      height: 35px;
+      background-color: $tertiary-color;
+      border-radius: 20px;
+    }
+
+  }
+
+}

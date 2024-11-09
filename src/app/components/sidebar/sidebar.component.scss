@@ -7,11 +7,11 @@
   gap: 2rem;
   position: fixed;
   left: 0;
-  padding: 10rem 1.5rem;
-  height: 100vh;
-  border-right: 0.1rem solid #d1d1d1a2;
-  z-index: -1;
-  list-style: none;
+  padding: 1.5rem;
+  height: 80vh;
+  border-right: 0.1rem solid rgba(209, 209, 209, 0.6352941176);
+  z-index: 0;
+  margin: 133px 0;
 
   li {
     display: flex;
@@ -29,9 +29,16 @@
       border-radius: 0.9rem;
       font-weight: bold;
       font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
 
       &.active {
         background-color: $tertiary-color;
+        color: $secondary-color;
+      }
+
+      &:hover {
+        background-color: #d1d1d162;
         color: $secondary-color;
       }
     }

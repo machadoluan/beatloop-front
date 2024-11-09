@@ -4,6 +4,8 @@
   position: fixed;
   top: 0;
   display: flex;
+  z-index: 99999;
+
   flex-direction: column;
 
   header {
@@ -13,7 +15,6 @@
     padding: 1rem 2rem;
     background-color: $secondary-color;
     width: 100vw;
-    z-index: 100;
     color: white;
 
     .logo {

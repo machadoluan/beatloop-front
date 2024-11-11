@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { Banner, Card } from '../../models/interface';
 
@@ -9,8 +7,6 @@ import { Banner, Card } from '../../models/interface';
   selector: 'app-browse',
   standalone: true,
   imports: [
-    HeaderComponent,
-    SidebarComponent,
     CommonModule
   ],
   templateUrl: './browse.component.html',
@@ -50,7 +46,7 @@ export class BrowseComponent implements OnInit {
   cards: Card[] = [
     {
       imageUrl: 'https://i.pinimg.com/originals/66/b3/24/66b3247f3e0ed3fa5279221874f628ac.jpg',
-      title: 'Naruto Pack Vol. 1',
+      title: 'Signature Vol. 2',
       subtitle: 'Anime Beats',
       type: 'Today sounds'
     },
@@ -62,8 +58,32 @@ export class BrowseComponent implements OnInit {
     },
     {
       imageUrl: 'https://logosmarcas.net/wp-content/uploads/2021/10/One-Piece-Logo.png',
-      title: 'One Piece Collection', 
+      title: 'One Piece Collection',
       subtitle: 'Anime Trap',
+      type: 'Today sounds'
+    },
+    {
+      imageUrl: 'https://i.pinimg.com/564x/55/ee/ed/55eeedda290da30ade77f7a312f36c69.jpg',
+      title: 'Attack on Titan Vol. 1',
+      subtitle: 'Epic Beats',
+      type: 'Today sounds'
+    },
+    {
+      imageUrl: 'https://i.pinimg.com/564x/55/ee/ed/55eeedda290da30ade77f7a312f36c69.jpg',
+      title: 'Attack on Titan Vol. 1',
+      subtitle: 'Epic Beats',
+      type: 'Today sounds'
+    },
+    {
+      imageUrl: 'https://i.pinimg.com/564x/55/ee/ed/55eeedda290da30ade77f7a312f36c69.jpg',
+      title: 'Attack on Titan Vol. 1',
+      subtitle: 'Epic Beats',
+      type: 'Today sounds'
+    },
+    {
+      imageUrl: 'https://i.pinimg.com/564x/55/ee/ed/55eeedda290da30ade77f7a312f36c69.jpg',
+      title: 'Attack on Titan Vol. 1',
+      subtitle: 'Epic Beats',
       type: 'Today sounds'
     },
     {
@@ -79,6 +99,7 @@ export class BrowseComponent implements OnInit {
       type: 'Today sounds'
     }
   ];
+
 
   constructor(
   ) { }

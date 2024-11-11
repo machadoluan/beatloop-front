@@ -1,42 +1,31 @@
-<div class="layout">
-  <app-header></app-header>
-  <div class="main-content">
-    <app-sidebar></app-sidebar>
-    <div class="content">
-      <div class="banner" *ngIf="banners.length">
-        <div class="banner-img" [style.background-image]="'url(' + banners[currentBannerIndex].imageUrl + ')'"
-          [ngClass]="animationClass">
-        </div>
-        <div class="banner-content">
-          <h1>
-            <span>{{ banners[currentBannerIndex].title }}</span>
-          </h1>
-          <div class="banner-indicators">
-            <span *ngFor="let banner of banners; let i = index" class="indicator"
-              [class.active]="i === currentBannerIndex" (click)="selectBanner(i)">
-            </span>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div class="today">
-        <h2>Today sounds</h2>
-
-        <div class="cards">
-          <div class="card" *ngFor="let card of cards">
-            <img [src]="card.imageUrl" alt="Image ">
-            <div class="description">
-              <span id="title">{{card.title}}</span>
-              <span id="subtitle">{{card.subtitle}}</span>
-            </div>
-            <div class="card-footer">Beatloop</div>
-          </div>
-        </div>
+<div class="content">
+  <div class="banner" *ngIf="banners.length">
+    <div class="banner-img" [style.background-image]="'url(' + banners[currentBannerIndex].imageUrl + ')'"
+      [ngClass]="animationClass">
+    </div>
+    <div class="banner-content">
+      <h1>
+        <span>{{ banners[currentBannerIndex].title }}</span>
+      </h1>
+      <div class="banner-indicators">
+        <span *ngFor="let banner of banners; let i = index" class="indicator" [class.active]="i === currentBannerIndex"
+          (click)="selectBanner(i)">
+        </span>
       </div>
     </div>
   </div>
 
-
+  <section *ngFor="let card of cards">
+    <h2>Today sounds</h2>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <img [src]="card.imageUrl" alt="Image ">
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+  </section>
 </div>

@@ -1,5 +1,15 @@
 @import '../../../../public/variables.scss';
 
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 230px;
+  background-color: $background-color;
+  z-index: 1000;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -8,10 +18,16 @@
   position: fixed;
   left: 0;
   padding: 1.5rem;
-  height: 80vh;
-  border-right: 0.1rem solid rgba(209, 209, 209, 0.6352941176);
+  height: 100vh;
+  background-color: $background-color;
   z-index: 0;
-  margin: 133px 0;
+
+  .logo {
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
 
   li {
     display: flex;
@@ -21,25 +37,51 @@
     gap: 0.5rem;
     cursor: pointer;
 
-
-
     span {
       width: 12rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.9rem;
-      font-weight: bold;
+      padding: 1rem;
       font-size: 14px;
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+
+      &.efeito {
+        width: 3px;
+        height: 100%;
+        background-color: $primary-color;
+      }
 
       &.active {
-        background-color: $tertiary-color;
-        color: $secondary-color;
+        font-weight: 600;
+        color: $primary-color;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: -1rem;
+          top: 0;
+          width: 4px;
+          height: 100%;
+          background-color: $primary-color;
+          border-radius: 0 3px 3px 0;
+        }
       }
 
       &:hover {
-        background-color: #d1d1d162;
-        color: $secondary-color;
+        &::before {
+          content: '';
+          position: absolute;
+          left: -1rem;
+          top: 0;
+          width: 4px;
+          height: 100%;
+          background-color: $primary-color;
+          border-radius: 0 3px 3px 0;
+        }
       }
     }
   }

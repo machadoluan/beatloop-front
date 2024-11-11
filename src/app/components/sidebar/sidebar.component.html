@@ -1,21 +1,31 @@
-<div class="sidebar">
+<div class="sidebar" [style.width]="sidebarWidth">
+  <div class="logo">
+    <img src="/img/logo.png" alt="">
+  </div>
+
   <li>
-    <span class="active">
+    <span [ngClass]="{'active': isActive('/browse')}" routerLink="/browse">
+      <i class="fas fa-home"></i>
       Browse
     </span>
-    <span>
+    <span [ngClass]="{'active': isActive('/packs')}" routerLink="/packs">
+      <i class="fas fa-box"></i>
       Sample Packs
     </span>
     <span>
+      <i class="fas fa-music"></i>
       One-shots
     </span>
     <span>
+      <i class="fas fa-microphone"></i>
       Vocals
     </span>
     <span>
+      <i class="fas fa-download"></i>
       Downloads
     </span>
     <span>
+      <i class="fas fa-heart"></i>
       Likes
     </span>
   </li>

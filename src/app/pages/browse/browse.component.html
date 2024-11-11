@@ -4,9 +4,7 @@
       [ngClass]="animationClass">
     </div>
     <div class="banner-content">
-      <h1>
-        <span>{{ banners[currentBannerIndex].title }}</span>
-      </h1>
+      <span id="title">{{ banners[currentBannerIndex].title }}</span>
       <div class="banner-indicators">
         <span *ngFor="let banner of banners; let i = index" class="indicator" [class.active]="i === currentBannerIndex"
           (click)="selectBanner(i)">
@@ -15,11 +13,16 @@
     </div>
   </div>
 
-  <section *ngFor="let card of cards">
+  <section>
     <h2>Today sounds</h2>
     <div class="cards" #cardsContainer>
       <div class="card" *ngFor="let card of cards">
-        <img [src]="card.imageUrl" alt="Image ">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
         <div class="description">
           <span id="title">{{card.title}}</span>
           <span id="subtitle">{{card.subtitle}}</span>
@@ -27,5 +30,12 @@
         <div class="card-footer">Beatloop</div>
       </div>
     </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+
   </section>
 </div>
+
+<app-play-music *ngIf="showPlayMusic" [card]="selectedCard">
+
+</app-play-music>

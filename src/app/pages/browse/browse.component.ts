@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { Banner, Card } from '../../models/interface';
+import { PlayMusicComponent } from "../play-music/play-music.component";
 
 
 @Component({
   selector: 'app-browse',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    PlayMusicComponent,
   ],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss'
@@ -100,6 +102,10 @@ export class BrowseComponent implements OnInit {
     }
   ];
 
+  showPlayMusic: boolean = false;
+  selectedCard: any;
+  @ViewChildren('cardsContainer') carousels!: QueryList<ElementRef>
+
 
   constructor(
   ) { }
@@ -136,4 +142,24 @@ export class BrowseComponent implements OnInit {
       }, 500);
     }, 10000);
   }
+
+  onPlayMusic(card: Card) {
+    this.showPlayMusic = true;
+    this.selectedCard = card;
+  }
+
+  onClosePlayMusic() {
+    this.showPlayMusic = false;
+  }
+
+  scrollLeft(index: number) {
+    const carousel = this.carousels.toArray()[index]
+    carousel.nativeElement.scrollBy({ left: -400, behavior: 'smooth' });
+  }
+  scrollRight(index: number) {
+    const carousel = this.carousels.toArray()[index]
+    carousel.nativeElement.scrollBy({ left: 400, behavior: 'smooth' });
+  }
 }
+
+

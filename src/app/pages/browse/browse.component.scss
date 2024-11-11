@@ -4,6 +4,8 @@
 .content {
   background-color: $secondary-color;
   padding: 25px;
+  border-radius: 30px;
+  height: 100%;
 
   .banner {
     width: 100%;
@@ -59,15 +61,12 @@
       justify-content: end;
       flex-direction: column;
 
-      h1 {
-        font-size: 2rem;
+      #title {
+        font-size: 1.5rem;
         font-weight: bold;
         font-weight: 400;
-        margin-bottom: 10px;
-
-        span {
-          font-weight: bold;
-        }
+        margin-bottom: 20px;
+        font-weight: bold;
       }
 
       .banner-indicators {
@@ -107,13 +106,49 @@
       color: white;
     }
 
+    .next {
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      cursor: pointer;
+      color: $tertiary-color;
+      opacity: 0;
+      transition: opacity 500ms ease;
+    }
+
+    .back {
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      cursor: pointer;
+      color: $tertiary-color;
+      opacity: 0;
+      transition: opacity 500ms ease;
+    }
+
+    &:hover {
+      .next,
+      .back {
+        opacity: 1;
+      }
+    }
+
     .cards {
       position: relative;
       display: flex;
       align-items: center;
       gap: 20px;
-      overflow-x: hidden;
+      overflow-x: scroll;
       scroll-behavior: smooth;
+
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       .card {
         border-radius: 20px;
@@ -124,10 +159,46 @@
         flex-direction: column;
         align-items: start;
         justify-content: space-around;
-        gap: 20px;
+        gap: 10px;
         margin-top: 30px;
-        height: 300px;
-        cursor: pointer;
+        height: 250px;
+
+        .card-img {
+          position: relative;
+
+          img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+          }
+
+          .play {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: $primary-color;
+            position: absolute;
+            display: grid;
+            place-content: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            color: $secondary-color;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 500ms ease;
+          }
+        }
+
+        &:hover {
+          .card-img {
+            .play {
+              opacity: 1;
+            }
+          }
+        }
 
         .description {
           display: flex;
@@ -146,18 +217,33 @@
           }
         }
 
-        img {
-          width: 150px;
-          height: 150px;
-          border-radius: 10px;
-        }
-
         .card-footer {
           font-size: 14px;
           font-weight: normal;
           color: white;
         }
       }
+    }
+  }
+}
+
+
+@media screen and (max-width: 450px) {
+  .content {
+
+    .banner {
+      .banner-content {
+        #title {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  section {
+    .next,
+    .back {
+      display: none;
     }
   }
 }

@@ -1,6 +1,19 @@
+@import '../../public/variables.scss';
+
 .main-content {
   margin-left: 230px;
   margin-top: 70px; // Altura do header
   min-height: calc(100vh - 70px);
   width: calc(100% - 230px);
+  background-color: $background-color;
+}
+
+@media screen and (max-width: 999px) {
+  app-header {
+    width: 100%;
+    margin-left: 0;
+  }
+  .main-content {
+    margin-left: 0;
+  }
 }

@@ -1,1 +1,11 @@
-<router-outlet />
+<ng-container *ngIf="router.url === '/home' || router.url === '/'; else defaultLayout">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #defaultLayout>
+  <app-sidebar></app-sidebar>
+  <app-header></app-header>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

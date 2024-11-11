@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,12 +11,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  @Output() sidebarWidthChange = new EventEmitter<string>();
+  sidebarService = inject(SidebarService);
 
-  sidebarWidth: string = '230px';
-
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   isActive(route: string): boolean {
     return this.router.url === route;

@@ -1,14 +1,16 @@
-<div class="sidebar" [style.width]="sidebarWidth">
+<div class="sidebar" [ngClass]="{'open': sidebarService.isOpen$ | async}">
   <div class="logo">
-    <img src="/img/logo.png" alt="">
+    <a href="/browse"><img src="/img/logo.png" alt=""></a>
+
+    <i class="fas fa-times" (click)="sidebarService.close()"></i>
   </div>
 
   <li>
-    <span [ngClass]="{'active': isActive('/browse')}" routerLink="/browse">
+    <span [ngClass]="{'active': isActive('/browse')}" routerLink="/browse" (click)="sidebarService.close()">
       <i class="fas fa-home"></i>
       Browse
     </span>
-    <span [ngClass]="{'active': isActive('/packs')}" routerLink="/packs">
+    <span [ngClass]="{'active': isActive('/packs')}" routerLink="/packs" (click)="sidebarService.close()">
       <i class="fas fa-box"></i>
       Sample Packs
     </span>

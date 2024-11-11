@@ -7,8 +7,6 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    HeaderComponent,
-    SidebarComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

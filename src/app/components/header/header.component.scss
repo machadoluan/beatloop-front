@@ -1,27 +1,33 @@
 @import '../../../../public/variables.scss';
 
-.container-header {
+:host {
   position: fixed;
   top: 0;
+  right: 0;
+  height: 70px;
+  width: calc(100% - 210px);
+  background-color: $background-color;
+  z-index: 999;
   display: flex;
-  z-index: 99999;
+  align-items: center;
+  padding: 0 15px;
+}
 
-  flex-direction: column;
-
+.container-header {
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: $secondary-color;
-    width: 100vw;
+    background-color: $background-color;
+    width: calc(100vw - 240px);
     color: white;
 
-    .logo {
-      img {
-        width: 150px;
-        height: auto;
-      }
+    .search {
+      width: 250px;
+      height: 35px;
+      background-color: $tertiary-color;
+      border-radius: 20px;
     }
 
     .menu {
@@ -53,30 +59,4 @@
       }
     }
   }
-
-  .menu-bar {
-    display: flex;
-    gap: 8rem;
-    align-items: center;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #d1d1d1a2;
-    width: 100%;
-    z-index: 100;
-    color: $secondary-color;
-    background-color: #ffff;
-
-    h1 {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .search {
-      width: 250px;
-      height: 35px;
-      background-color: $tertiary-color;
-      border-radius: 20px;
-    }
-
-  }
-
 }

@@ -27,7 +27,6 @@ export class CadastroComponent {
 
   // Objeto que armazena os valores dos campos do formulário
 
-
   // Classes e texto para indicar visualmente a força da senha
   passwordStrengthClass = '';
   passwordStrengthText = '';
@@ -48,6 +47,7 @@ export class CadastroComponent {
   constructor(private fb: FormBuilder, private authService: AuthService) {
     // Inicialização do formulário com validações
     this.cadastroForm = fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]], // Campo obrigatório e mínimo de 3 caracteres
       email: ['', [Validators.required, Validators.email]], // Campo obrigatório e formato de email válido
       password: ['', [Validators.required, this.passwordStrengthValidator()]], // Campo obrigatório e validação personalizada
       confirmPassword: ['', [Validators.required]] // Campo obrigatório
@@ -173,6 +173,7 @@ export class CadastroComponent {
     this.authService.cadastro(this.cadastroForm.value).subscribe((response: any) => {
       console.log(response);
     });
+    console.table(this.cadastroForm.value);
   }
 
 

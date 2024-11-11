@@ -37,11 +37,15 @@
 
         <form [formGroup]="cadastroForm">
           <div class="form-group">
+            <input type="text" formControlName="name" placeholder="Name*" formControlName="name">
+          </div>
+          <div class="form-group">
             <input type="email" placeholder="E-mail address*" formControlName="email">
           </div>
           <div class="form-group">
             <div class="password-input">
-              <input [type]="showPassword ? 'text' : 'password'" placeholder="Password*" (input)="onPasswordChange($event)" name="password" formControlName="password">
+              <input [type]="showPassword ? 'text' : 'password'" placeholder="Password*"
+                (input)="onPasswordChange($event)" name="password" formControlName="password">
               <i class="password-toggle fa-regular" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
                 (click)="togglePassword()">
               </i>
@@ -91,7 +95,8 @@
               </div>
             </div>
             <div class="password-input">
-              <input [type]="showConfirmPassword ? 'text' : 'password'" (input)="onConfirmPasswordChange($event)" placeholder="Confirm Password*" formControlName="confirmPassword">
+              <input [type]="showConfirmPassword ? 'text' : 'password'" (input)="onConfirmPasswordChange($event)"
+                placeholder="Confirm Password*" formControlName="confirmPassword">
               <i class="password-toggle fa-regular" [class.fa-eye]="!showConfirmPassword"
                 [class.fa-eye-slash]="showConfirmPassword" (click)="toggleConfirmPassword()">
               </i>
@@ -103,8 +108,8 @@
         </form>
 
         <div class="dados">
-          <!-- <button [disabled]="cadastroForm.invalid" (click)="cadastrar()" >Continue</button> -->
-          <button (click)="cadastrar()" >Continue</button>
+          <button [disabled]="cadastroForm.invalid" (click)="cadastrar()">Continue</button>
+          <!-- <button (click)="cadastrar()">Continue</button> -->
         </div>
       </div>
 

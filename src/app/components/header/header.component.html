@@ -1,19 +1,29 @@
 <div class="container-header">
   <header>
 
-    <div class="search"></div>
+    <div class="logo">
+      <i class="fas fa-bars menu-icon" (click)="sidebarService.open()"></i>
+      <a href="/browse"><img src="/img/logo.png" alt=""></a>
+    </div>
+
+    <div class="search">
+      <input type="text" placeholder="Search">
+      <i class="fas fa-search"></i>
+    </div>
 
     <div class="menu">
+      <div class="search-mobile">
+        <!-- <input type="text" placeholder="Search"> -->
+        <i class="fas fa-search"></i>
+      </div>
       <div class="invite-friend">
         Invite a friend
       </div>
       <span id="help">Help</span>
-      <div class="volume">
-        <i class="fas fa-volume-up"></i>
-      </div>
       <div class="account">
         <a href="/login"><i class="fas fa-user"></i></a>
       </div>
     </div>
+
   </header>
 </div>

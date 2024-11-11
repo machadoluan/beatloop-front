@@ -18,22 +18,70 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 2rem;
     background-color: $background-color;
     width: calc(100vw - 240px);
     color: white;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      display: none;
+
+      img {
+        width: 100px;
+      }
+
+      i {
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
 
     .search {
       width: 250px;
       height: 35px;
       background-color: $tertiary-color;
       border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+
+      input {
+        background: none;
+        border: none;
+        outline: none;
+        color: $secondary-color;
+
+        &::placeholder {
+          color: $secondary-color;
+        }
+
+      }
+
+      i {
+        color: $secondary-color;
+      }
     }
 
     .menu {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1rem;
+
+      .search-mobile {
+        display: none;
+        width: 40px;
+        height: 40px;
+        background-color: $secondary-color;
+        border-radius: 50%;
+        place-content: center;
+      }
 
       .invite-friend {
         padding: 5px 10px;
@@ -52,10 +100,72 @@
       .volume,
       .account {
         cursor: pointer;
+        width: 40px;
+        height: 40px;
+        background-color: $secondary-color;
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
 
         i {
           color: white;
         }
+      }
+    }
+  }
+}
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+}
+
+@media screen and (max-width: 999px) {
+  .container-header {
+
+    header {
+      width: 100vw;
+      margin-left: 0;
+
+      .logo {
+        display: flex;
+      }
+
+      .search {
+        display: none;
+      }
+
+      .menu {
+        .search-mobile {
+          display: grid;
+        }
+      }
+    }
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+
+}
+
+
+@media screen and (max-width: 720px) {
+  .container-header {
+    header {
+      .invite-friend {
+        display: none;
+      }
+
+      #help {
+        display: none;
       }
     }
   }

@@ -7,8 +7,27 @@
     </div>
 
     <div class="search">
-      <input type="text" placeholder="Search">
+      <input (focus)="onFocus()" type="text" placeholder="Pesquisar" />
       <i class="fas fa-search"></i>
+
+      <div class="popular-searches" *ngIf="showSearchSuggestions">
+        <h4>Buscas Populares</h4>
+        <div class="search-tags">
+          <span class="tag">INSTRUMENTS</span>
+          <span class="tag">EFFECTS</span>
+          <span class="tag">EQ</span>
+          <span class="tag">DELAY</span>
+          <span class="tag">REVERB</span>
+          <span class="tag">SAMPLERS</span>
+          <span class="tag">MASTERING</span>
+          <span class="tag">DISTORTION</span>
+          <span class="tag">COMPRESSOR</span>
+          <span class="tag">VOCAL</span>
+          <span class="tag">SYNTHESIZERS</span>
+          <span class="tag">DRUMS</span>
+          <!-- Adicione mais tags conforme necessário -->
+        </div>
+      </div>
     </div>
 
     <div class="menu">

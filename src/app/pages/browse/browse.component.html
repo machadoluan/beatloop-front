@@ -32,7 +32,36 @@
     </div>
     <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
     <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
 
+  <section class="special-offers">
+    <h2>Special offers</h2>
+    <div class="banner-offers" *ngIf="bannersOffers">
+      <div class="banner-img" [style.background-image]="'url(' + bannersOffers[currentBannerIndex].imageUrl + ')'">
+      </div>
+
+      <div class="banner-content">
+        <div class="banner-inform">
+          <span id="title">{{ bannersOffers[currentBannerIndex].title }}</span>
+          <span id="subtitle">{{ bannersOffers[currentBannerIndex].subtitle }}</span>
+        </div>
+        <div class="button">
+          <button>Buy now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <h2>More categories</h2>
+    <div class="cards">
+      <div class="card-category" *ngFor="let category of categories">
+        <div class="category-overlay">
+          <span class="category-name">{{category.name}}</span>
+        </div>
+        <img [src]="category.imageUrl" [alt]="category.name">
+      </div>
+    </div>
   </section>
 </div>
 

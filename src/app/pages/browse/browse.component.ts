@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core'
 import { CommonModule } from '@angular/common';
-import { Banner, Card } from '../../models/interface';
+import { Banner, BannerOffers, Card } from '../../models/interface';
 import { PlayMusicComponent } from "../play-music/play-music.component";
 
 
@@ -20,24 +20,28 @@ export class BrowseComponent implements OnInit {
   // Banners
   banners: Banner[] = [
     {
-      imageUrl: 'https://img.freepik.com/fotos-gratis/uma-pintura-de-um-lago-de-montanha-com-uma-montanha-ao-fundo_188544-9126.jpg',
+      imageUrl: '/img/banner1.jpg',
       title: 'Os Melhores Samples de Funk para Download',
     },
     {
-      imageUrl: 'https://t3.ftcdn.net/jpg/06/59/38/36/360_F_659383627_UtpH18oGF0QlsEkhg0Sn5zVJIVlaoBsg.jpg',
+      imageUrl: '/img/banner2.jpg',
       title: 'Pacote Exclusivo de Samples para Trap',
     },
     {
-      imageUrl: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwcvQsM8-g8UhqIkYhqovspXo29w2py-MZLaIBlHXL9w6X15KhrwmQrEplNiMeVNnrkZsYznXjYFlLXwJ0a-cEI5OQv7_MUv1MF5xc434aM88hZZ-JnU-Id8EGWHOcAXCBAkEZL3VKjCWE-BtfLP7p8UoO50SZ0rOGd2OtV1gz2hDOfxd3UP6AG3TViQ/s1600-rw/4k-pc-wallpaper-ai-art.webp',
+      imageUrl: '/img/banner3.jpg',
       title: 'Samples Profissionais para Música Eletrônica',
     },
     {
-      imageUrl: 'https://png.pngtree.com/thumb_back/fh260/background/20230516/pngtree-cute-wallpapers-cats-wallpapers-hd-4k-wallpapers-desktop-wallpapers-hd-image_2562853.jpg',
+      imageUrl: '/img/banner4.jpg',
       title: 'Loops e Samples para Hip Hop Nacional',
-    },
+    }
+  ];
+
+  bannersOffers: BannerOffers[] = [
     {
-      imageUrl: 'https://aws-obg-image-lb-1.tcl.com/content/dam/brandsite/region/brazil/news/blogs-35-45/4K-vs-8K-TVs-The-Visual-Difference-Plus-Pros-And-Con.jpg',
-      title: 'Kit de Samples para Produtores Iniciantes',
+      imageUrl: 'https://blog.nvidia.com.br/wp-content/uploads/sites/12/2023/04/2022-nvidia-corporate-key-visual-banner-4K-2-scaled.jpg',
+      title: 'Pack Premium de Samples - 50% OFF',
+      subtitle: 'Mais de 1000 samples profissionais por um preço especial'
     }
   ];
   currentBannerIndex = 0;
@@ -106,6 +110,20 @@ export class BrowseComponent implements OnInit {
   selectedCard: any;
   @ViewChildren('cardsContainer') carousels!: QueryList<ElementRef>
 
+  categories = [
+    { name: 'INSTRUMENTS', imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'EFFECTS', imageUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'EQ', imageUrl: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'DELAY', imageUrl: 'https://images.unsplash.com/photo-1563330232-57114bb0823c?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'REVERB', imageUrl: 'https://images.unsplash.com/photo-1626128665085-483747621778?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'SAMPLERS', imageUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'MASTERING', imageUrl: 'https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'DISTORTION', imageUrl: 'https://images.unsplash.com/photo-1525201548942-d8732f6617a0?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'COMPRESSOR', imageUrl: 'https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'VOCAL', imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'SYNTHESIZERS', imageUrl: 'https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'DRUMS', imageUrl: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=2070&auto=format&fit=crop' }
+  ];
 
   constructor(
   ) { }

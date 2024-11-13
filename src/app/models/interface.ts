@@ -12,6 +12,10 @@ export interface Banner {
   title: string;
 }
 
+export interface BannerOffers extends Banner {
+  subtitle: string;
+}
+
 export interface Card {
   imageUrl: string;
   title: string;

@@ -77,6 +77,10 @@
         background-color: $primary-color;
       }
 
+      &:hover{
+        color: $primary-color;
+      }
+
       &.active {
         font-weight: 600;
         color: $primary-color;

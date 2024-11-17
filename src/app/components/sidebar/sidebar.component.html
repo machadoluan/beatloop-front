@@ -14,7 +14,7 @@
       <i class="fas fa-box"></i>
       Sample Packs
     </span>
-    <span>
+    <span [ngClass]="{'active': isActive('/one-shots')}" routerLink="/one-shots" (click)="sidebarService.close()">
       <i class="fas fa-music"></i>
       One-shots
     </span>

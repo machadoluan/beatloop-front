@@ -22,3 +22,10 @@ export interface Card {
   subtitle: string;
   type: string;
 }
+
+export interface OneShot {
+  imageUrl: string;
+  title: string;
+  subtitle: string;
+  music: string;
+}

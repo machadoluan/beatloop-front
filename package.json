@@ -24,6 +24,7 @@
     "angular-oauth2-oidc": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "wavesurfer.js": "^7.8.8",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

@@ -1,0 +1,331 @@
+<div class="content">
+
+  <div class="filter">
+    <div class="generes">
+      <div class="genere cardFilter" (click)="openFilter('genres')">
+        Genere
+        <i class="fa-solid" [ngClass]="{'fa-chevron-down': !filterStates.genres, 'fa-chevron-up': filterStates.genres}"></i>
+      </div>
+      <div class="loop cardFilter" (click)="openFilter('loop')">
+        Loop
+        <i class="fa-solid" [ngClass]="{'fa-chevron-down': !filterStates.loop, 'fa-chevron-up': filterStates.loop}"></i>
+      </div>
+      <div class="pakcs cardFilter" (click)="openFilter('packs')">
+        Packs
+        <i class="fa-solid" [ngClass]="{'fa-chevron-down': !filterStates.packs, 'fa-chevron-up': filterStates.packs}"></i>
+      </div>
+      <div class="key cardFilter" (click)="openFilter('key')">
+        Key
+        <i class="fa-solid" [ngClass]="{'fa-chevron-down': !filterStates.key, 'fa-chevron-up': filterStates.key}"></i>
+      </div>
+      <div class="BPM cardFilter" (click)="openFilter('bpm')">
+        BPM
+        <i class="fa-solid" [ngClass]="{'fa-chevron-down': !filterStates.bpm, 'fa-chevron-up': filterStates.bpm}"></i>
+      </div>
+    </div>
+
+    <div class="filterData">
+      <div class="genere" [ngClass]="[animationClass, filterStates.genres ? 'd-flex' : 'd-none' ]">
+        <span>Rock</span>
+        <span>Pop</span>
+        <span>Eletrônica</span>
+        <span>Clássica</span>
+        <span>Jazz</span>
+        <span>Funk</span>
+        <span>Samba</span>
+        <span>MPB</span>
+        <span>Forró</span>
+        <span>Reggae</span>
+      </div>
+
+      <div class="loop" [ngClass]="{'active': filterStates.loop}">
+        <span>1 min</span>
+        <span>2 min</span>
+        <span>3 min</span>
+        <span>4 min</span>
+        <span>5 min</span>
+        <span>6 min</span>
+        <span>7 min</span>
+        <span>8 min</span>
+        <span>9 min</span>
+        <span>10 min</span>
+      </div>
+
+      <div class="packs" [ngClass]="{'active': filterStates.packs}">
+        <span>1 min</span>
+        <span>2 min</span>
+        <span>3 min</span>
+        <span>4 min</span>
+        <span>5 min</span>
+        <span>6 min</span>
+        <span>7 min</span>
+        <span>8 min</span>
+        <span>9 min</span>
+        <span>10 min</span>
+      </div>
+
+      <div class="key" [ngClass]="{'active': filterStates.key}">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+        <span>F</span>
+        <span>G</span>
+      </div>
+
+      <div class="BPM" [ngClass]="{'active': filterStates.bpm}">
+        <span>60</span>
+        <span>70</span>
+        <span>80</span>
+        <span>90</span>
+        <span>100</span>
+        <span>110</span>
+        <span>120</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+  <section>
+    <div class="section-inform">
+      <h2>Today sounds</h2>
+    </div>
+    <div class="cards" #cardsContainer>
+      <div class="card" *ngFor="let card of cards">
+        <div class="card-img">
+          <div class="play" (click)="onPlayMusic(card)">
+            <i class="fas fa-play"></i>
+          </div>
+          <img [src]="card.imageUrl" alt="Image ">
+        </div>
+        <div class="description">
+          <span id="title">{{card.title}}</span>
+          <span id="subtitle">{{card.subtitle}}</span>
+        </div>
+        <div class="card-footer">Beatloop</div>
+      </div>
+    </div>
+    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+  </section>
+</div>

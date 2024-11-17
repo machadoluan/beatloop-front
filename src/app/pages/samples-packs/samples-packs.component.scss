@@ -1,0 +1,218 @@
+@import '../../../../public/variables.scss';
+
+.content {
+  background-color: $secondary-color;
+  padding: 25px;
+  border-radius: 30px;
+  height: 100%;
+
+  .filter {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    flex-direction: column;
+
+    color: white;
+
+    .generes {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .cardFilter {
+        padding: 5px 20px;
+        border: 2px solid $primary-color;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    }
+
+    .filterData {
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      div {
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 14px;
+        display: none;
+        transition: display 500ms ease-in-out;
+
+        &.active {
+          display: flex;
+        }
+
+        span {
+          padding: 5px 20px;
+          background-color: $primary-color;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  section {
+    padding: 40px 0;
+    position: relative;
+
+    .section-inform {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        color: white;
+      }
+
+      span {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        color: white;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 500ms ease;
+        cursor: pointer;
+      }
+
+    }
+
+
+    .next {
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      cursor: pointer;
+      color: $tertiary-color;
+      opacity: 0;
+      transition: opacity 500ms ease;
+    }
+
+    .back {
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      cursor: pointer;
+      color: $tertiary-color;
+      opacity: 0;
+      transition: opacity 500ms ease;
+    }
+
+    &:hover {
+      .section-inform {
+        span {
+          opacity: 1;
+        }
+      }
+
+      .next,
+      .back {
+        opacity: 1;
+      }
+    }
+
+    .cards {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card {
+        border-radius: 20px;
+        padding: 20px;
+        background-color: $background-color;
+        border: 1px solid $card-border-color;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-around;
+        gap: 10px;
+        margin-top: 30px;
+        height: 250px;
+
+        .card-img {
+          position: relative;
+
+          img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+          }
+
+          .play {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: $primary-color;
+            position: absolute;
+            display: grid;
+            place-content: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            color: $secondary-color;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 500ms ease;
+
+            &.show {
+              opacity: 1;
+            }
+          }
+        }
+
+        &:hover {
+          .card-img {
+            .play {
+              opacity: 1;
+            }
+          }
+        }
+
+        .description {
+          display: flex;
+          flex-direction: column;
+
+          #title {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+          }
+
+          #subtitle {
+            font-size: 13px;
+            font-weight: normal;
+            color: white;
+          }
+        }
+
+        .card-footer {
+          font-size: 14px;
+          font-weight: normal;
+          color: white;
+        }
+      }
+    }
+  }
+}

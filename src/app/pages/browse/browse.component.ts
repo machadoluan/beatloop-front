@@ -1,7 +1,10 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core'
 import { CommonModule } from '@angular/common';
-import { Banner, BannerOffers, Card } from '../../models/interface';
+import { Banner, BannerOffers, Card, OneShot } from '../../models/interface';
 import { PlayMusicComponent } from "../play-music/play-music.component";
+import WaveSurfer from 'wavesurfer.js';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -10,13 +13,19 @@ import { PlayMusicComponent } from "../play-music/play-music.component";
   imports: [
     CommonModule,
     PlayMusicComponent,
+    MatCheckboxModule,
+    RouterLink
   ],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss'
 })
 
 
-export class BrowseComponent implements OnInit {
+export class BrowseComponent implements OnInit, AfterViewInit {
+  // ViewsChild
+  @ViewChildren('waveformContainer') container!: QueryList<ElementRef>;
+  @ViewChildren('cardsContainer') carousels!: QueryList<ElementRef>
+
   // Banners
   banners: Banner[] = [
     {
@@ -37,6 +46,7 @@ export class BrowseComponent implements OnInit {
     }
   ];
 
+  // Banners Offers
   bannersOffers: BannerOffers[] = [
     {
       imageUrl: 'https://blog.nvidia.com.br/wp-content/uploads/sites/12/2023/04/2022-nvidia-corporate-key-visual-banner-4K-2-scaled.jpg',
@@ -44,11 +54,8 @@ export class BrowseComponent implements OnInit {
       subtitle: 'Mais de 1000 samples profissionais por um preço especial'
     }
   ];
-  currentBannerIndex = 0;
-  animationClass: string = '';
 
   // Cards
-
   cards: Card[] = [
     {
       imageUrl: 'https://i.pinimg.com/originals/66/b3/24/66b3247f3e0ed3fa5279221874f628ac.jpg',
@@ -106,10 +113,7 @@ export class BrowseComponent implements OnInit {
     }
   ];
 
-  showPlayMusic: boolean = false;
-  selectedCard: any;
-  @ViewChildren('cardsContainer') carousels!: QueryList<ElementRef>
-
+  // Categories
   categories = [
     { name: 'INSTRUMENTS', imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070&auto=format&fit=crop' },
     { name: 'EFFECTS', imageUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop' },
@@ -125,11 +129,63 @@ export class BrowseComponent implements OnInit {
     { name: 'DRUMS', imageUrl: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=2070&auto=format&fit=crop' }
   ];
 
+  // One Shots
+  oneShots: OneShot[] = [
+    { title: 'APT', subtitle: 'Bruno Mars', imageUrl: 'https://cdn-images.dzcdn.net/images/cover/258e6042338ce64bb4157c0c94b232ac/0x1900-000000-80-0-0.jpg', music: 'audio1.mp3' },
+    { title: 'Bad Liar', subtitle: 'Imagine Dragons', imageUrl: 'https://i.scdn.co/image/ab67616d0000b273da6f73a25f4c79d0e6b4a8bd', music: 'audio2.mp3' },
+    { title: 'Drive License', subtitle: 'Olivia Rodrigo', imageUrl: 'https://s2-g1.glbimg.com/XKc4iWAR1rOmbCK55PGBymr1W6w=/0x0:2000x2000/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/2/h/WCTKdxRVGnhyoE1A6jiA/oliviacapa.jpg', music: 'audio3.mp3' },
+    { title: 'Die With Small', subtitle: 'Bruno Mars', imageUrl: 'https://cdn-images.dzcdn.net/images/cover/4bd5903f4ce8f2601916bfadb44efe8a/0x1900-000000-80-0-0.jpg', music: 'audio4.mp3' }
+  ]
+
+  // Variables
+  showPlayMusic: boolean = false;
+  selectedCard: any;
+  currentBannerIndex = 0;
+  animationClass: string = '';
+  playReady: boolean[] = [];
+  waveSurfer: WaveSurfer[] = [];
+  currentTime: string[] = [];
+  totalTime: string[] = [];
+
   constructor(
   ) { }
 
   ngOnInit() {
     this.loadBanners();
+  }
+
+  ngAfterViewInit(): void {
+    this.oneShots.forEach((oneShot, index) => {
+      this.waveSurfer[index] = WaveSurfer.create({
+        container: this.container.toArray()[index].nativeElement,
+        waveColor: 'white',
+        progressColor: '#6EC281',
+        width: 200,
+        height: 40,
+      })
+      this.waveSurfer[index].load(oneShot.music);
+      this.waveSurfer[index].on('ready', () => {
+        this.playReady[index] = true;
+        this.totalTime[index] = this.formatTime(this.waveSurfer[index].getDuration());
+      });
+      this.waveSurfer[index].on('audioprocess', () => {
+        this.currentTime[index] = this.formatTime(this.waveSurfer[index].getCurrentTime());
+      });
+    })
+  }
+
+  formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+  togglePlayMusic(index: number): void {
+    console.log(`Toggling play/pause for index: ${index}, isPlaying: ${this.waveSurfer[index]?.isPlaying()}`);
+    if (this.waveSurfer[index]?.isPlaying()) {
+      this.waveSurfer[index].pause();
+    } else {
+      this.waveSurfer[index].play();
+    }
   }
 
   async loadBanners() {

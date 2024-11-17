@@ -6,6 +6,7 @@ import { AuthCallbackComponent } from './auth-callback.component';
 import { BrowseComponent } from './pages/browse/browse.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SamplesPacksComponent } from './pages/samples-packs/samples-packs.component';
+import { OneShotsComponent } from './pages/one-shots/one-shots.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: 'packs',
     component: SamplesPacksComponent
+  },
+  {
+    path: 'one-shots',
+    component: OneShotsComponent
   },
   {
     path: 'signup',

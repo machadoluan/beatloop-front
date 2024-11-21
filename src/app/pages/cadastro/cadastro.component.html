@@ -1,5 +1,5 @@
 <div class="container-signup">
-  <div class="content-signup">
+  <div class="content-signup" *ngIf="!showConfirmationCode" @fadeInOut>
 
     <div class="logo">
       <img src="/img/logo.png" alt="BeatLoop Logo">
@@ -29,7 +29,7 @@
       </div>
 
 
-      <div class="email" [ngClass]="[animationClass, loginSocial ? 'd-none' : 'd-flex']">
+      <div class="email" [ngClass]="[animationClass, loginSocial ? 'd-none' : 'd-flex']" >
         <div class="voltar" (click)="toggleSocial()">
           <i class="fas fa-chevron-left"></i>
           <span>Back</span>
@@ -41,6 +41,7 @@
           </div>
           <div class="form-group">
             <input type="email" placeholder="E-mail address*" formControlName="email">
+            <span id="error-email" *ngIf="this.errorEmail"><i class="fas fa-exclamation-triangle"></i> {{this.errorEmail}}</span>
           </div>
           <div class="form-group">
             <div class="password-input">
@@ -53,19 +54,19 @@
             <div class="password-strength" [class.active]="password.length > 0">
               <div class="strength-bars">
                 <div class="bar" [ngClass]="{
-                    'weak': passwordStrengthClass === 'weak',
-                    'medium': passwordStrengthClass === 'medium',
-                    'strong': passwordStrengthClass === 'strong'
-                  }">
+                'weak': passwordStrengthClass === 'weak',
+                'medium': passwordStrengthClass === 'medium',
+                'strong': passwordStrengthClass === 'strong'
+              }">
                 </div>
                 <div class="bar" [ngClass]="{
-                    'medium': passwordStrengthClass === 'medium',
-                    'strong': passwordStrengthClass === 'strong'
-                  }">
+                  'medium': passwordStrengthClass === 'medium',
+                  'strong': passwordStrengthClass === 'strong'
+                }">
                 </div>
                 <div class="bar" [ngClass]="{
-                    'strong': passwordStrengthClass === 'strong'
-                  }">
+                  'strong': passwordStrengthClass === 'strong'
+                }">
                 </div>
               </div>
               <span class="strength-text" [ngClass]="passwordStrengthClass">
@@ -108,18 +109,15 @@
         </form>
 
         <div class="dados">
+          <span>{{otherError}}</span>
           <button [disabled]="cadastroForm.invalid" (click)="cadastrar()">Continue</button>
-          <!-- <button (click)="cadastrar()">Continue</button> -->
         </div>
       </div>
-
-
 
       <div class="create-account">
         <!-- <div class="linha"></div> -->
         <span>Don't have an account? <a href="/login">Log In</a></span>
       </div>
-
 
       <div class="terms">
         By continuing, you agree to Beatloop's
@@ -127,6 +125,38 @@
         <span>
         </span>
       </div>
+
     </div>
+
+
+  </div>
+
+  <div class="verify-code" *ngIf="showConfirmationCode" @fadeInOut>
+    <span id="title">Verificação.</span>
+    <span>Enviei um código de 4 dígitos para o email: <br> <span id="email" (click)="trocarEmail()">
+        {{cadastroForm.value.email}}</span></span>
+
+    <div class="code-container">
+      <div class="code">
+        <div class="code">
+          <input type="text" maxlength="1" class="code-input" data-index="0" (input)="updateCode($event, codeInput2)"
+            #codeInput1 />
+          <input type="text" maxlength="1" class="code-input" data-index="1" (input)="updateCode($event, codeInput3)"
+            #codeInput2 />
+          <input type="text" maxlength="1" class="code-input" data-index="2" (input)="updateCode($event, codeInput4)"
+            #codeInput3 />
+          <input type="text" maxlength="1" class="code-input" data-index="3" (input)="updateCode($event, codeInput5)"
+            #codeInput4 />
+          <input type="text" maxlength="1" class="code-input" data-index="3" (input)="updateCode($event, codeInput6)"
+            #codeInput5 />
+          <input type="text" maxlength="1" class="code-input" data-index="3" (input)="updateCode($event, null)"
+            #codeInput6 />
+        </div>
+
+      </div>
+      <span id="reenviar" (click)="reenviarCode()">Reenviar</span>
+    </div>
+
+    <button (click)="confirmarCodigo()">Avança</button>
   </div>
 </div>

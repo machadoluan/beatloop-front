@@ -1,7 +1,7 @@
 import { Component, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
@@ -63,8 +63,6 @@ export class LoginComponent {
   }
 
   userLogin() {
-    this.authService.userLogin(this.userLoginForm.value).subscribe((response: any) => {
-      console.log(response);
-    });
+    this.authService.login(this.userLoginForm.value);
   }
 }

@@ -4,15 +4,34 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, A
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../../services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
-
+import { AuthService } from '../../services/auth/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,   // Corrigido: Usando CommonModule
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './cadastro.component.html',
-  styleUrl: './cadastro.component.scss'
+  styleUrl: './cadastro.component.scss',
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-out', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class CadastroComponent {
 
@@ -24,12 +43,16 @@ export class CadastroComponent {
   showConfirmPassword = false;
   password = '';
   confirmPassword = '';
+  showConfirmationCode: boolean = false;
+  code: string = '';
 
   // Objeto que armazena os valores dos campos do formulário
 
   // Classes e texto para indicar visualmente a força da senha
   passwordStrengthClass = '';
   passwordStrengthText = '';
+  errorEmail: string = '';
+  otherError: string = '';
 
   // Objeto que controla os critérios de validação da senha
   passwordCriteria = {
@@ -50,7 +73,7 @@ export class CadastroComponent {
       name: ['', [Validators.required, Validators.minLength(3)]], // Campo obrigatório e mínimo de 3 caracteres
       email: ['', [Validators.required, Validators.email]], // Campo obrigatório e formato de email válido
       password: ['', [Validators.required, this.passwordStrengthValidator()]], // Campo obrigatório e validação personalizada
-      confirmPassword: ['', [Validators.required]] // Campo obrigatório
+      confirmPassword: ['', [Validators.required]]
     }, {
       validators: this.passwordMatchValidator // Validação para comparar as senhas
     });
@@ -170,10 +193,24 @@ export class CadastroComponent {
   }
 
   cadastrar() {
-    this.authService.cadastro(this.cadastroForm.value).subscribe((response: any) => {
-      console.log(response);
-    });
-    console.table(this.cadastroForm.value);
+    this.errorEmail = '';
+    this.otherError = '';
+
+    this.authService.cadastro(this.cadastroForm.value).subscribe(
+      (response) => {
+        console.log(response)
+        this.showConfirmationCode = true;
+        this.errorEmail = '';
+        this.otherError = '';
+      },
+      (error) => {
+        if (error = 'Email already exists') {
+          this.errorEmail = 'Email already exists';
+        } else {
+          this.otherError = error
+        }
+      }
+    )
   }
 
 
@@ -184,12 +221,67 @@ export class CadastroComponent {
         this.loginSocial = !this.loginSocial;
         this.animationClass = 'fade-in';
       }, 500); // Tempo da animação em ms
+
     } else {
       this.animationClass = 'fade-out';
       setTimeout(() => {
         this.loginSocial = !this.loginSocial;
         this.animationClass = 'fade-in';
       }, 500);
+      this.cadastroForm.reset()
+
     }
+  }
+
+  updateCode(event: Event, nextInput: HTMLInputElement | null): void {
+    const input = event.target as HTMLInputElement;
+    const inputValue = input.value;
+
+    if (!/^\d$/.test(inputValue)) {
+      input.value = '';  // Limpa o campo se não for um número
+      return; // Não atualiza o código
+    }
+
+
+    // Atualiza a variável 'codigo' concatenando os valores dos inputs
+    this.code += inputValue;
+
+    // Move o foco para o próximo input, se existir
+    if (inputValue.length >= 1 && nextInput) {
+      nextInput.focus();
+    }
+  }
+
+  confirmarCodigo() {
+    this.authService.verifyCode(this.cadastroForm.value.email, this.code).subscribe(
+      (response) => {
+        console.log(response)
+        this.code = '';
+
+      },
+      (error) => {
+        console.error(error);
+        this.code = '';
+
+      }
+    )
+  }
+
+  reenviarCode() {
+    this.code = '';
+
+    this.authService.reenviarCode(this.cadastroForm.value.email).subscribe(
+      (response) => {
+        console.log(response)
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+  trocarEmail() {
+    this.code = '';
+    this.showConfirmationCode = false;
   }
 }

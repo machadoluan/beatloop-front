@@ -1,8 +1,10 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, ElementRef, Injectable, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { timeout } from 'rxjs';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 
 @Injectable({
@@ -17,15 +19,20 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class LoginComponent {
 
+  @ViewChildren('inputRef') inputs!: QueryList<ElementRef>;
+
   showPassword = false;
   loginSocial = true;
   animationClass: string = '';
+  isVerifying = false;
   userLoginForm: FormGroup;
+  code: string = ''
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private oauthService: OAuthService
   ) {
     this.userLoginForm = this.fb.group({
       email: ['', Validators.required],
@@ -62,7 +69,65 @@ export class LoginComponent {
     this.authService.loginWithFacebook();
   }
 
+ updateCode(event: Event, currentIndex: number): void {
+    const input = event.target as HTMLInputElement;
+    const inputValue = input.value;
+
+    // Limpa o valor se não for um número
+    if (!/^\d$/.test(inputValue) && inputValue !== '') {
+      input.value = '';
+      return;
+    }
+
+    // Atualiza o foco para o próximo input, se necessário
+    const inputsArray = this.inputs.toArray();
+    if (inputValue.length >= 1 && currentIndex < inputsArray.length - 1) {
+      inputsArray[currentIndex + 1].nativeElement.focus();
+    }
+
+    // Reconstrói o código com os valores atuais dos inputs
+    this.code = inputsArray.map(el => el.nativeElement.value).join('');
+  }
+
+
   userLogin() {
     this.authService.login(this.userLoginForm.value);
+
+    setTimeout(() => {
+      if (this.authService.verify()) {
+        this.router.navigate(['/browse']);
+      } else {
+        this.isVerifying = true
+        this.reenviarCode()
+      }
+    }, 2000)
+  }
+
+  reenviarCode() {
+    this.code = '';
+
+    this.authService.reenviarCode(this.userLoginForm.value.email).subscribe(
+      (response) => {
+        console.log(response)
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+  confirmarCodigo() {
+    this.authService.verifyCode(this.userLoginForm.value.email, this.code).subscribe(
+      (response) => {
+        console.log(response)
+        this.code = '';
+        this.router.navigate(['/browse']);
+      },
+      (error) => {
+        console.error(error);
+        this.code = '';
+
+      }
+    )
   }
 }

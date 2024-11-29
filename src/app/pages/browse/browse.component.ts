@@ -5,6 +5,7 @@ import { PlayMusicComponent } from "../play-music/play-music.component";
 import WaveSurfer from 'wavesurfer.js';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({
@@ -146,8 +147,8 @@ export class BrowseComponent implements OnInit, AfterViewInit {
   waveSurfer: WaveSurfer[] = [];
   currentTime: string[] = [];
   totalTime: string[] = [];
-
   constructor(
+    private authService: AuthService
   ) { }
 
   ngOnInit() {

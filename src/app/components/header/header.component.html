@@ -1,4 +1,5 @@
 <div class="container-header">
+
   <header>
 
     <div class="logo">
@@ -39,9 +40,14 @@
         Invite a friend
       </div>
       <span id="help">Help</span>
-      <div class="account">
-        <a href="/login"><i class="fas fa-user"></i></a>
+      <div class="account" *ngIf="!user" routerLink="/login">
+        <i class="fas fa-user"></i>
       </div>
+
+      <div class="profile-img" *ngIf="user">
+        <img routerLink="/profile" [src]="user.photo" alt="profile img">
+      </div>
+
     </div>
 
   </header>

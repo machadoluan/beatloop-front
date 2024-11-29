@@ -41,7 +41,7 @@
       justify-content: center;
       gap: 1rem;
 
-      
+
 
       .email {
         margin-top: 30px;
@@ -184,6 +184,99 @@
 
         a {
           color: rgba(33, 77, 255, 1);
+        }
+      }
+
+
+    }
+
+    .verify-code {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: $background-color;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 50px;
+
+      border-radius: 20px;
+      z-index: 1000;
+      gap: 2rem;
+
+      .code-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+
+        .code {
+          display: flex;
+          gap: 10px;
+
+          .code-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid $primary-color;
+            border-radius: 8px;
+            background-color: transparent;
+            outline: none;
+            color: #fff;
+
+            &:focus {
+              border-color: $primary-color;
+              /* Ajuste para a cor principal */
+              box-shadow: 0 0 5px rgba($primary-color, 0.5);
+            }
+          }
+        }
+
+        #reenviar {
+          cursor: pointer;
+          font-size: 12px;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            color: rgba($primary-color, 0.2);
+          }
+        }
+      }
+
+
+      #title {
+        font-size: 24px;
+        color: white;
+      }
+
+      span {
+        font-size: 14px;
+        color: #d1d1d1;
+        text-align: center;
+
+        &#email {
+          color: $primary-color;
+        }
+      }
+
+
+      button {
+        background-color: $primary-color;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 60px;
+        font-size: 14px;
+        font-weight: 600;
+        color: $secondary-color;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        i {
+          font-size: 12px;
         }
       }
     }

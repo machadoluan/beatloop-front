@@ -1,19 +1,30 @@
-import { Component, inject, HostListener } from '@angular/core';
+import { Component, inject, HostListener, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   sidebarService = inject(SidebarService);
   showSearchSuggestions: boolean = false;
+  user: any;
 
-  constructor() {}
+  constructor(
+    private authService: AuthService
+  ) { }
+
+
+  ngOnInit(): void {
+    this.user = this.authService.getUserFromToken();
+    console.log(this.user)
+  }
 
   // Mostrar sugestões quando o input receber foco
   onFocus() {

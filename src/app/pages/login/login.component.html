@@ -10,7 +10,7 @@
     </div>
 
 
-    <div class="login">
+    <div class="login" *ngIf="!isVerifying">
 
       <div class="login-social" [ngClass]="[animationClass, loginSocial ? 'd-flex' : 'd-none']">
         <div class="social" (click)="loginWithGoogle()">
@@ -66,6 +66,25 @@
         <span>
         </span>
       </div>
+
+    </div>
+    <div class="verify-code" *ngIf="isVerifying" @fadeInOut>
+      <span id="title">E-mail não verificado.</span>
+      <span>Enviei um código de 4 dígitos para o email: <br> <span id="email">
+          {{userLoginForm.value.email}}</span></span>
+
+      <div class="code-container">
+        <div class="code">
+          <div *ngFor="let input of [0, 1, 2, 3, 4, 5]; let i = index">
+            <input #inputRef (input)="updateCode($event, i)" maxlength="1" type="text"  class="code-input" />
+          </div>
+
+
+        </div>
+        <span id="reenviar" (click)="reenviarCode()">Reenviar</span>
+      </div>
+
+      <button (click)="confirmarCodigo()">Avança</button>
     </div>
   </div>
 </div>

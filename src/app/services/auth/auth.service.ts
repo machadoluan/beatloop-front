@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { catchError, throwError } from 'rxjs';
 
@@ -18,7 +19,7 @@ const authConfigGoogle: AuthConfig = {
   issuer: 'https://accounts.google.com',
   redirectUri: window.location.origin + '/auth/callback',
   clientId: '1088646860176-dli8cvcdqm4ush61vft5i7u992bscdj5.apps.googleusercontent.com',
-  responseType: 'code',
+  responseType: 'token id_token',
   scope: 'openid profile email',
   showDebugInformation: true,
   strictDiscoveryDocumentValidation: false
@@ -29,9 +30,10 @@ const authConfigGoogle: AuthConfig = {
 })
 export class AuthService {
   private currentProvider: 'FACEBOOK' | 'GOOGLE' = 'FACEBOOK';
+  private apiUrl = 'http://localhost:3000/auth';
 
-  constructor(private oauthService: OAuthService, private http: HttpClient) {
-    this.configureFacebookAuth();
+  constructor(private oauthService: OAuthService, private http: HttpClient, private route: Router) {
+    this.configureGoogleAuth();
   }
 
   private configureFacebookAuth() {
@@ -53,52 +55,52 @@ export class AuthService {
 
   loginWithGoogle() {
     this.configureGoogleAuth();
+
+    // Inicia o fluxo de login com Google
     this.oauthService.initLoginFlow();
   }
-
-  logout() {
-    this.oauthService.logOut();
+  sendTokenToBackend(token: string) {
+    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/google`, { token }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  handleLoginCallback() {
-    return this.oauthService.tryLogin();
-  }
-
-  get isLoggedIn(): boolean {
-    return this.oauthService.hasValidAccessToken();
-  }
-
-  get userProfile() {
-    const claims = this.oauthService.getIdentityClaims();
-    return claims ? claims : null;
-  }
-
-  private apiUrl = 'http://localhost:3000/auth'
-
-
+  // handleLoginCallback() {
+  //   this.oauthService.tryLogin().then(() => {
+  //     if (this.oauthService.hasValidAccessToken()) {
+  //       this.route.navigate(['/dashboard']);
+  //     } else {
+  //       console.error('Falha na autenticação');
+  //     }
+  //   }).catch((error) => {
+  //     console.error('Erro durante o callback da autenticação:', error);
+  //   });
+  // }
 
   login(dadosLogin: any) {
-    return this.http.post(`${this.apiUrl}/login`, dadosLogin).pipe(
-      catchError(this.handleError)
-    )
+    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/login`, dadosLogin).subscribe((response) => {
+      if (response.accessToken) {
+        localStorage.setItem('token', response.accessToken);
+      }
+    });
   }
 
   cadastro(dadosCadastro: any) {
     return this.http.post(`${this.apiUrl}/register`, dadosCadastro).pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
   verifyCode(email: string, code: string) {
     return this.http.post(`${this.apiUrl}/verify`, { email, code }).pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
   reenviarCode(email: string) {
     return this.http.post(`${this.apiUrl}/reenviar`, { email }).pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -118,8 +120,35 @@ export class AuthService {
       }
     }
 
-    // Retorna o erro completo para o componente
     return throwError(errorMessage);
   }
 
+  getUserFromToken(): any | null {
+    const token = this.getToken();
+    if (token) {
+      const tokenPayload = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(tokenPayload));
+      return decodedPayload;
+    }
+    return null;
+  }
+
+  isAuthenticado(): boolean {
+    const token = this.getToken();
+    return !!token;
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.route.navigate(['/']);
+  }
+
+  verify(): boolean {
+    const user = this.getUserFromToken();
+    return user?.verify ?? false;
+  }
 }

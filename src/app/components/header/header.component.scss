@@ -14,6 +14,7 @@
 }
 
 .container-header {
+
   header {
     display: flex;
     justify-content: space-between;
@@ -70,6 +71,7 @@
         outline: none;
         color: $secondary-color;
         width: 100%;
+
         &::placeholder {
           color: $secondary-color;
         }
@@ -158,6 +160,18 @@
 
         i {
           color: white;
+        }
+      }
+
+      .profile-img {
+        width: 40px;
+        height: 40px;
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          cursor: pointer;
         }
       }
     }

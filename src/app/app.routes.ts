@@ -7,11 +7,15 @@ import { BrowseComponent } from './pages/browse/browse.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SamplesPacksComponent } from './pages/samples-packs/samples-packs.component';
 import { OneShotsComponent } from './pages/one-shots/one-shots.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/no-auth.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [NoAuthGuard]
   },
   {
     path: 'home',
@@ -39,7 +43,13 @@ export const routes: Routes = [
   },
   {
     path: 'signup',
-    component: CadastroComponent
+    component: CadastroComponent,
+    canActivate: [NoAuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

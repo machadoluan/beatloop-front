@@ -17,6 +17,7 @@ export class AuthCallbackComponent implements OnInit {
 
   private async handleAuthentication() {
     try {
+      await this.authService.handleLoginCallback();
 
       // Após o sucesso do login, o idToken estará disponível
       const idToken = this.oauthService.getIdToken();

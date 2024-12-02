@@ -26,7 +26,8 @@ export class LoginComponent {
   animationClass: string = '';
   isVerifying = false;
   userLoginForm: FormGroup;
-  code: string = ''
+  code: string = '';
+  messageError: string = '';
 
   constructor(
     private authService: AuthService,
@@ -69,7 +70,7 @@ export class LoginComponent {
     this.authService.loginWithFacebook();
   }
 
- updateCode(event: Event, currentIndex: number): void {
+  updateCode(event: Event, currentIndex: number): void {
     const input = event.target as HTMLInputElement;
     const inputValue = input.value;
 
@@ -91,16 +92,15 @@ export class LoginComponent {
 
 
   userLogin() {
-    this.authService.login(this.userLoginForm.value);
-
-    setTimeout(() => {
-      if (this.authService.verify()) {
+    this.authService.login(this.userLoginForm.value).subscribe(
+      (response) => {
+        localStorage.setItem('token', response.accessToken);
         this.router.navigate(['/browse']);
-      } else {
-        this.isVerifying = true
-        this.reenviarCode()
+      },
+      (error) => {
+        this.messageError = error;
       }
-    }, 2000)
+    )
   }
 
   reenviarCode() {

@@ -65,28 +65,26 @@ export class AuthService {
     );
   }
 
-  // handleLoginCallback() {
-  //   this.oauthService.tryLogin().then(() => {
-  //     if (this.oauthService.hasValidAccessToken()) {
-  //       this.route.navigate(['/dashboard']);
-  //     } else {
-  //       console.error('Falha na autenticação');
-  //     }
-  //   }).catch((error) => {
-  //     console.error('Erro durante o callback da autenticação:', error);
-  //   });
-  // }
-
-  login(dadosLogin: any) {
-    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/login`, dadosLogin).subscribe((response) => {
-      if (response.accessToken) {
-        localStorage.setItem('token', response.accessToken);
+  handleLoginCallback() {
+    this.oauthService.tryLogin().then(() => {
+      if (this.oauthService.hasValidAccessToken()) {
+        this.route.navigate(['/browse']);
+      } else {
+        console.error('Falha na autenticação');
       }
+    }).catch((error) => {
+      console.error('Erro durante o callback da autenticação:', error);
     });
   }
 
+  login(dadosLogin: any) {
+    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/login`, dadosLogin).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   cadastro(dadosCadastro: any) {
-    return this.http.post(`${this.apiUrl}/register`, dadosCadastro).pipe(
+    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/register`, dadosCadastro).pipe(
       catchError(this.handleError)
     );
   }
@@ -103,24 +101,31 @@ export class AuthService {
     );
   }
 
+  updateProfile(data: any) {
+    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/update`, data).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Server error message';
+    let errorMessage = 'Server error';
 
     if (error.error instanceof ErrorEvent) {
       // Erro no lado do cliente
       console.error('Ocorreu um erro no cliente:', error.error.message);
     } else {
       // Erro no backend
-      console.error(error.error.message);
+      console.error(error.error);
 
       if (error.error.message === 'User already exists') {
         errorMessage = 'Email already exists';
       } else {
-        errorMessage = 'Unknown error, please try again later';
+        errorMessage = error.error.message;
+        console.log(errorMessage)
       }
     }
 
-    return throwError(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 
   getUserFromToken(): any | null {

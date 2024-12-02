@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
@@ -67,7 +68,7 @@ export class CadastroComponent {
   // Formulário reativo do Angular
   cadastroForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     // Inicialização do formulário com validações
     this.cadastroForm = fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]], // Campo obrigatório e mínimo de 3 caracteres
@@ -198,7 +199,7 @@ export class CadastroComponent {
 
     this.authService.cadastro(this.cadastroForm.value).subscribe(
       (response) => {
-        console.log(response)
+        localStorage.setItem('token', response.accessToken);
         this.showConfirmationCode = true;
         this.errorEmail = '';
         this.otherError = '';
@@ -255,9 +256,8 @@ export class CadastroComponent {
   confirmarCodigo() {
     this.authService.verifyCode(this.cadastroForm.value.email, this.code).subscribe(
       (response) => {
-        console.log(response)
         this.code = '';
-
+        this.router.navigate(['/browse']);
       },
       (error) => {
         console.error(error);

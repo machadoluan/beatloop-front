@@ -70,9 +70,10 @@
         <div class="one-shot-description">
           <div class="logo">
             <img [src]="oneShots.imageUrl" alt="Logo">
-            <div class="play" (click)="togglePlayMusic(i)" [ngClass]="{'show': waveSurfer[i]?.isPlaying() || playReady[i]}">
+            <div class="play" (click)="togglePlayMusic(i)"
+              [ngClass]="{'show': waveSurfer[i] && waveSurfer[i].isPlaying() || playReady[i]}">
               <i class="fas" *ngIf="playReady[i]"
-                [ngClass]="{'fa-play': !waveSurfer[i]?.isPlaying(), 'fa-pause': waveSurfer[i]?.isPlaying()}"></i>
+                [ngClass]="{'fa-play': waveSurfer[i] && !waveSurfer[i].isPlaying(), 'fa-pause': waveSurfer[i] && waveSurfer[i].isPlaying()}"></i>
             </div>
           </div>
           <div class="one-shot-name">
@@ -82,8 +83,8 @@
         </div>
 
         <div class="one-shot-music">
-          <div class="audio"  #waveformContainer></div>
-          {{currentTime[i] || '0:00'}}  / {{totalTime[i]}}
+          <div class="audio" #waveformContainer></div>
+          {{currentTime[i] || '0:00'}} / {{totalTime[i]}}
         </div>
 
         <div class="one-shot-settings">

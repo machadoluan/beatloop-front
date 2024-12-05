@@ -29,8 +29,12 @@
       <div class="photo colunm-dados">
         <div class="title">Photo</div>
         <div class="photo-group">
-          <img [src]="user.photo" alt="">
-          <button id="change">Change</button>
+          <img [src]="formData.photo" alt="">
+          <label for="file-upload" class="custom-file-upload">
+            Change
+          </label>
+          <input type="file" id="file-upload" (change)="onFileChange($event)" style="display: none;">
+          <span (click)="onRemovePhoto()">Remove</span>
         </div>
       </div>
       <div class="btns colunm-dados">
@@ -39,6 +43,54 @@
         <div class="btn-infos" [ngClass]="[animationClass, toggleBtns ? 'd-flex' : 'd-none']">
           <button id="cancel" (click)="onCancel()">Cancel</button>
           <button id="save" (click)="onSave()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subscription-section">
+    <h1>My subscription</h1>
+
+    <div class="subscription-card">
+      <div class="subscription-header">
+        <h2>Sound +</h2>
+        <span class="management-badge">Subscription Management</span>
+      </div>
+
+      <div class="subscription-content">
+
+        <div class="features">
+          <div class="feature-item">
+            <i class="fa-solid fa-check"></i>
+            <span>Lorem Ipsum is simply dummy text.</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-check"></i>
+            <span>Lorem Ipsum is simply dummy text.</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-check"></i>
+            <span>Lorem Ipsum is simply dummy text.</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-check"></i>
+            <span>Lorem Ipsum is simply dummy text.</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-check"></i>
+            <span>Lorem Ipsum is simply dummy text.</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-check"></i>
+            <span>Lorem Ipsum is simply dummy text.</span>
+          </div>
+        </div>
+
+        <div class="download-progress">
+          <div class="progress-circle">
+            <i class="fa-solid fa-download"></i>
+            <span>10/100</span>
+          </div>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    VerifyEmailComponent
   ],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss',
@@ -234,51 +236,9 @@ export class CadastroComponent {
     }
   }
 
-  updateCode(event: Event, nextInput: HTMLInputElement | null): void {
-    const input = event.target as HTMLInputElement;
-    const inputValue = input.value;
-
-    if (!/^\d$/.test(inputValue)) {
-      input.value = '';  // Limpa o campo se não for um número
-      return; // Não atualiza o código
-    }
 
 
-    // Atualiza a variável 'codigo' concatenando os valores dos inputs
-    this.code += inputValue;
 
-    // Move o foco para o próximo input, se existir
-    if (inputValue.length >= 1 && nextInput) {
-      nextInput.focus();
-    }
-  }
-
-  confirmarCodigo() {
-    this.authService.verifyCode(this.cadastroForm.value.email, this.code).subscribe(
-      (response) => {
-        this.code = '';
-        this.router.navigate(['/browse']);
-      },
-      (error) => {
-        console.error(error);
-        this.code = '';
-
-      }
-    )
-  }
-
-  reenviarCode() {
-    this.code = '';
-
-    this.authService.reenviarCode(this.cadastroForm.value.email).subscribe(
-      (response) => {
-        console.log(response)
-      },
-      (error) => {
-        console.error(error);
-      }
-    )
-  }
 
   trocarEmail() {
     this.code = '';

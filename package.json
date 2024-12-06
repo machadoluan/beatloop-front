@@ -24,6 +24,7 @@
     "angular-code-input": "^2.0.0",
     "angular-oauth2-oidc": "^17.0.2",
     "ng-otp-input": "^1.9.3",
+    "ngx-otp-input": "^1.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "wavesurfer.js": "^7.8.8",

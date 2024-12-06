@@ -29,3 +29,11 @@ export interface OneShot {
   subtitle: string;
   music: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  photo: string;
+  banner: string;
+}

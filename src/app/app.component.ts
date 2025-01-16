@@ -15,7 +15,12 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'beatloop';
 
+  sidebarWidth: string = '60px';
+
   constructor(public router: Router) { }
 
+  onSidebarWidthChange(width: string) {
+    this.sidebarWidth = width
+  }
 
 }

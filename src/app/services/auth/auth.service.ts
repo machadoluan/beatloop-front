@@ -28,6 +28,7 @@ const authConfigGoogle: AuthConfig = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private currentProvider: 'FACEBOOK' | 'GOOGLE' = 'FACEBOOK';
   private apiUrl = 'http://localhost:3000/auth';

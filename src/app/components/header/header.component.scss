@@ -4,37 +4,38 @@
   position: fixed;
   top: 0;
   right: 0;
-  height: 70px;
-  width: calc(100% - 210px);
+  // width: calc(100% - 210px);
+  width: 100%;
   background-color: $background-color;
-  z-index: 999;
   display: flex;
   align-items: center;
-  padding: 0 15px;
+  z-index: 99999;
+
 }
 
 .container-header {
+  width: 100%;
+  z-index: 99999;
+  border-bottom: 2px solid #000000;
+  background-color: $background-color;
+
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 0.5rem;
-    padding-right: 2rem;
-    background-color: $background-color;
-    width: calc(100vw - 240px);
+    // width: calc(100vw - 240px);
+    width: 100%;
     color: white;
+    padding: 0.5rem 1rem;
 
     .logo {
       display: flex;
       align-items: center;
       gap: 1rem;
-      display: none;
 
       img {
-        width: 100px;
+        width: 120px;
       }
 
       i {
@@ -43,116 +44,17 @@
       }
     }
 
-    .search {
-      width: 250px;
-      height: 35px;
-      background-color: $tertiary-color;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      padding: 0 15px;
-      position: relative;
-      transition: width 0.3s ease;
-
-      &:focus-within {
-        width: 500px;
-        border-radius: 20px 20px 0 0;
-        padding: 10px 15px;
-
-
-        .popular-searches {
-          display: block;
-        }
-      }
-
-      input {
-        background: none;
-        border: none;
-        outline: none;
-        color: $secondary-color;
-        width: 100%;
-
-        &::placeholder {
-          color: $secondary-color;
-        }
-      }
-
-      i {
-        color: $secondary-color;
-      }
-
-
-      .popular-searches {
-        display: none;
-        position: absolute;
-        top: 35px;
-        left: 0;
-        width: 100%;
-        background-color: $tertiary-color;
-        border-radius: 0 0 20px 20px;
-        padding: 16px;
-
-        h4 {
-          color: $secondary-color;
-          margin-bottom: 12px;
-          font-size: 14px;
-        }
-
-        .search-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-
-          .tag {
-            background-color: rgba($secondary-color, 0.1);
-            padding: 8px 12px;
-            border-radius: 20px;
-            color: $secondary-color;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-
-            &:hover {
-              background-color: rgba($secondary-color, 0.2);
-            }
-          }
-        }
-      }
-    }
-
     .menu {
       display: flex;
       align-items: center;
       gap: 1rem;
 
-      .search-mobile {
-        display: none;
-        width: 40px;
-        height: 40px;
-        background-color: $secondary-color;
-        border-radius: 50%;
-        place-content: center;
-      }
-
-      .invite-friend {
-        padding: 5px 10px;
-        background-color: $primary-color;
-        border-radius: 5px;
-        color: $secondary-color;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: bold;
-      }
-
-      #help {
-        cursor: pointer;
-      }
 
       .volume,
       .account {
         cursor: pointer;
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         background-color: $secondary-color;
         border-radius: 50%;
         display: grid;

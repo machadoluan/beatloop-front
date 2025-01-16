@@ -5,10 +5,9 @@
 }
 
 .main-content {
-  margin-left: 230px;
-  margin-top: 70px; // Altura do header
-  min-height: calc(100vh - 70px);
-  background-color: $background-color;
+  margin-top: 50px; 
+  transition: margin-left 500ms ease-in-out;
+
 }
 
 @media screen and (max-width: 999px) {
@@ -17,6 +16,6 @@
     margin-left: 0;
   }
   .main-content {
-    margin-left: 0;
+    margin-left: 0 !important;
   }
 }

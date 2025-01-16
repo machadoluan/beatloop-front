@@ -15,10 +15,21 @@ export class HeaderComponent implements OnInit {
   sidebarService = inject(SidebarService);
   showSearchSuggestions: boolean = false;
   user: any;
+  isMenuOpen: boolean = true;
 
   constructor(
     private authService: AuthService
   ) { }
+
+
+  btnToggle() {
+    if (this.isMenuOpen) {
+      this.sidebarService.open()
+    } else {
+      this.sidebarService.close()
+    }
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
 
   ngOnInit(): void {

@@ -9,7 +9,7 @@ export class SidebarService {
   isOpen$ = this.isOpenSubject.asObservable();
 
   open() {
-    this.isOpenSubject.next(true)
+    this.isOpenSubject.next(true);
   }
 
   close() {

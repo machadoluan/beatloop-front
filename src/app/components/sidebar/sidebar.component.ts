@@ -13,10 +13,24 @@ import { SidebarService } from '../../services/sidebar.service';
 export class SidebarComponent {
   sidebarService = inject(SidebarService);
 
+  sidebarWidth: string = '80px';
+  descButton: boolean = false;
+  iconSlide: boolean = false;
+
+  @Output() sidebarWidthChange = new EventEmitter<string>();
+
   constructor(private router: Router) {}
 
   isActive(route: string): boolean {
     return this.router.url === route;
+  }
+
+
+  toggleSlideBar(){
+    this.sidebarWidth = this.sidebarWidth === "80px" ? "200px" : "80px"
+    this.descButton = !this.descButton
+    this.iconSlide = !this.iconSlide
+    this.sidebarWidthChange.emit(this.sidebarWidth);
   }
 
 }

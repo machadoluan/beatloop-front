@@ -1,0 +1,70 @@
+footer {
+   
+
+    .footer-content {
+      display: flex;
+      border-top: 1px solid rgba($color:  $card-border-color, $alpha: 0.5);
+      border-bottom:  1px solid rgba($color:  $card-border-color, $alpha: 0.5);
+      padding: 3rem 0;
+
+
+      .footer-about {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        flex: 1;
+        gap: 2rem;
+
+        .logo {
+          img {
+            width: 130px;
+          }
+        }
+
+        #about {
+          width: 50%;
+          font-size: 10px;
+          color: white;
+        }
+      }
+
+      .footer-links {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+
+        .links {
+          display: flex;
+          flex-direction: column;
+          font-size: 10px;
+          color: white;
+          text-align: center;
+          gap: 1rem;
+
+          #title{
+            font-size: 12px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .footer-footer{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+
+      .politic{
+        font-size: 10px;
+        color: white;
+        display: flex;
+        gap: 2rem;
+      }
+
+      .redes-sociais{
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }

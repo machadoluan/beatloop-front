@@ -16,12 +16,16 @@
 
   <section>
     <div class="section-inform">
-      <h2>Today sounds</h2>
-      <span routerLink="/one-shots">
-        See all
-        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-      </span>
+      <div class="section-title">
+        <h2>Today sounds</h2>
+        <span class="see-all">See All</span>
+      </div>
+      <div class="arrows">
+        <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
+        <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
+      </div>
     </div>
+
     <div class="cards" #cardsContainer>
       <div class="card" *ngFor="let card of cards">
         <div class="card-img">
@@ -37,8 +41,6 @@
         <div class="card-footer">Beatloop</div>
       </div>
     </div>
-    <div class="next" (click)="scrollRight(0)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></div>
-    <div class="back" (click)="scrollLeft(0)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></div>
   </section>
 
   <section class="special-offers">
@@ -62,47 +64,54 @@
   </section>
 
   <section class="one-shots">
-
     <div class="section-inform">
-      <h2>One-shots</h2>
-    </div>
-    <div class="one-shots-content" *ngFor="let oneShots of oneShots; let i = index">
-      <div class="one-shot">
-        <div class="one-shot-description">
-          <div class="logo">
-            <img [src]="oneShots.imageUrl" alt="Logo">
-            <div class="play" (click)="togglePlayMusic(i)"
-              [ngClass]="{'show': waveSurfer[i] && waveSurfer[i].isPlaying() || playReady[i]}">
-              <i class="fas" *ngIf="playReady[i]"
-                [ngClass]="{'fa-play': waveSurfer[i] && !waveSurfer[i].isPlaying(), 'fa-pause': waveSurfer[i] && waveSurfer[i].isPlaying()}"></i>
-            </div>
-          </div>
-          <div class="one-shot-name">
-            <span id="title">{{oneShots.title}}</span>
-            <span id="subtitle">{{oneShots.subtitle}}</span>
-          </div>
-        </div>
-
-        <div class="one-shot-music">
-          <div class="audio" #waveformContainer></div>
-          {{currentTime[i] || '0:00'}} / {{totalTime[i]}}
-        </div>
-
-        <div class="one-shot-settings">
-          <i class="fa-regular fa-heart"></i>
-          <mat-checkbox></mat-checkbox>
-        </div>
+      <div class="section-title">
+        <h2>Top One-shots</h2>
+        <span class="see-all">See All</span>
       </div>
     </div>
 
-    <div class="see-more">
-      <a href="/one-shots">See more one shots <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+
+    <div class="one-shots-card">
+      <div class="one-shots-content" *ngFor="let oneShots of oneShots; let i = index">
+        <div class="one-shot">
+          <div class="one-shot-description">
+            <div class="logo">
+              <div class="arrow-top">
+                {{i + 1}}
+                <i class="fa-solid fa-caret-up"></i>
+              </div>
+              <img [src]="oneShots.imageUrl" alt="Logo">
+              <div class="play" (click)="togglePlayMusic(i)"
+                [ngClass]="{'show': waveSurfer[i] && waveSurfer[i].isPlaying() || playReady[i]}">
+                <i class="fas" *ngIf="playReady[i]"
+                  [ngClass]="{'fa-play': waveSurfer[i] && !waveSurfer[i].isPlaying(), 'fa-pause': waveSurfer[i] && waveSurfer[i].isPlaying()}"></i>
+              </div>
+            </div>
+            <div class="one-shot-name">
+              <span id="title">{{oneShots.title}}</span>
+              <span id="subtitle">{{oneShots.subtitle}}</span>
+            </div>
+          </div>
+          <div class="one-shot-music">
+            <div class="audio" #waveformContainer></div>
+            {{currentTime[i] || '0:00'}} / {{totalTime[i]}}
+          </div>
+          <div class="one-shot-settings">
+            <i class="fa-regular fa-heart"></i>
+            <mat-checkbox></mat-checkbox>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="categories">
     <div class="section-inform">
-      <h2>More categories</h2>
+      <div class="section-title">
+        <h2>More categories</h2>
+        <span class="see-all">See All</span>
+      </div>
     </div>
     <div class="cards">
       <div class="card-category" *ngFor="let category of categories">
@@ -113,6 +122,46 @@
       </div>
     </div>
   </section>
+
+  <section class="special-offers">
+    <div class="section-inform">
+      <h2>Special offers</h2>
+    </div>
+    <div class="banner-offers" *ngFor="let banner of bannersOffers">
+      <div class="banner-img" [style.background-image]="'url(' + banner.imageUrl + ')'">
+      </div>
+
+      <div class="banner-content">
+        <div class="banner-inform">
+          <span id="title">{{ banner.title }}</span>
+          <span id="subtitle">{{ banner.subtitle }}</span>
+        </div>
+        <div class="button">
+          <button>Buy now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="section-inform">
+      <div class="section-title">
+        <h2>More categories</h2>
+        <span class="see-all">See All</span>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card-category" *ngFor="let category of categories">
+        <div class="category-overlay">
+          <span class="category-name">{{category.name}}</span>
+        </div>
+        <img [src]="category.imageUrl" [alt]="category.name">
+      </div>
+    </div>
+  </section>
+
+
+  <app-footer></app-footer>
 </div>
 
 

@@ -6,6 +6,7 @@ import WaveSurfer from 'wavesurfer.js';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 
 @Component({
@@ -15,8 +16,8 @@ import { AuthService } from '../../services/auth/auth.service';
     CommonModule,
     PlayMusicComponent,
     MatCheckboxModule,
-    RouterLink
-  ],
+    FooterComponent
+],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss'
 })
@@ -132,10 +133,10 @@ export class BrowseComponent implements OnInit, AfterViewInit {
 
   // One Shots
   oneShots: OneShot[] = [
-    { title: 'APT', subtitle: 'Bruno Mars', imageUrl: 'https://cdn-images.dzcdn.net/images/cover/258e6042338ce64bb4157c0c94b232ac/0x1900-000000-80-0-0.jpg', music: 'audio1.mp3' },
-    { title: 'Bad Liar', subtitle: 'Imagine Dragons', imageUrl: 'https://i.scdn.co/image/ab67616d0000b273da6f73a25f4c79d0e6b4a8bd', music: 'audio2.mp3' },
-    { title: 'Drive License', subtitle: 'Olivia Rodrigo', imageUrl: 'https://s2-g1.glbimg.com/XKc4iWAR1rOmbCK55PGBymr1W6w=/0x0:2000x2000/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/2/h/WCTKdxRVGnhyoE1A6jiA/oliviacapa.jpg', music: 'audio3.mp3' },
-    { title: 'Die With Small', subtitle: 'Bruno Mars', imageUrl: 'https://cdn-images.dzcdn.net/images/cover/4bd5903f4ce8f2601916bfadb44efe8a/0x1900-000000-80-0-0.jpg', music: 'audio4.mp3' }
+    { title: 'APT', subtitle: 'Bruno Mars', imageUrl: 'https://cdn-images.dzcdn.net/images/cover/258e6042338ce64bb4157c0c94b232ac/0x1900-000000-80-0-0.jpg', music: '' },
+    { title: 'Bad Liar', subtitle: 'Imagine Dragons', imageUrl: 'https://i.scdn.co/image/ab67616d0000b273da6f73a25f4c79d0e6b4a8bd', music: '' },
+    { title: 'Drive License', subtitle: 'Olivia Rodrigo', imageUrl: 'https://s2-g1.glbimg.com/XKc4iWAR1rOmbCK55PGBymr1W6w=/0x0:2000x2000/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/2/h/WCTKdxRVGnhyoE1A6jiA/oliviacapa.jpg', music: '' },
+    { title: 'Die With Small', subtitle: 'Bruno Mars', imageUrl: 'https://cdn-images.dzcdn.net/images/cover/4bd5903f4ce8f2601916bfadb44efe8a/0x1900-000000-80-0-0.jpg', music: '' }
   ]
 
   // Variables
@@ -147,6 +148,7 @@ export class BrowseComponent implements OnInit, AfterViewInit {
   waveSurfer: WaveSurfer[] = [];
   currentTime: string[] = [];
   totalTime: string[] = [];
+  scrollDisponivel: boolean = false;
   constructor(
     private authService: AuthService
   ) { }
@@ -235,6 +237,8 @@ export class BrowseComponent implements OnInit, AfterViewInit {
     const carousel = this.carousels.toArray()[index]
     carousel.nativeElement.scrollBy({ left: 400, behavior: 'smooth' });
   }
+
+  
 }
 
 

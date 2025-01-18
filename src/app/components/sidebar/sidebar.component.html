@@ -1,31 +1,28 @@
 <div class="sidebar" [style.width]="sidebarWidth" [ngClass]="{'open': sidebarService.isOpen$ | async}">
   <li>
-    <span [ngClass]="{'active': isActive('/browse')}" routerLink="/browse"
-      (click)="sidebarService.close()">
+    <span [ngClass]="{'active': isActive('/browse')}" routerLink="/browse" (click)="sidebarService.close()">
       <i class="fas fa-home"></i>
-      <span id="desc" *ngIf="descButton">Browse</span>
+      <span id="desc" *ngIf="isDescVisible | async">Browse</span>
     </span>
-    <span [ngClass]="{'active': isActive('/packs')}" routerLink="/packs"
-      (click)="sidebarService.close()">
+    <span [ngClass]="{'active': isActive('/packs')}" routerLink="/packs" (click)="sidebarService.close()">
       <i class="fas fa-box"></i>
-      <span id="desc" *ngIf="descButton">Sample Packs</span>
+      <span id="desc" *ngIf="isDescVisible | async">Sample Packs</span>
     </span>
-    <span [ngClass]="{'active': isActive('/one-shots')}" routerLink="/one-shots"
-      (click)="sidebarService.close()">
+    <span [ngClass]="{'active': isActive('/one-shots')}" routerLink="/one-shots" (click)="sidebarService.close()">
       <i class="fas fa-music"></i>
-      <span id="desc" *ngIf="descButton || sidebarService.isOpen$">One-shots</span>
+      <span id="desc" *ngIf="isDescVisible | async">One-shots</span>
     </span>
     <span>
       <i class="fas fa-microphone"></i>
-      <span id="desc" *ngIf="descButton">Vocals</span>
+      <span id="desc" *ngIf="isDescVisible | async">Vocals</span>
     </span>
     <span>
       <i class="fas fa-download"></i>
-      <span id="desc" *ngIf="descButton">Downloads</span>
+      <span id="desc" *ngIf="isDescVisible | async">Downloads</span>
     </span>
     <span>
       <i class="fas fa-heart"></i>
-      <span id="desc" *ngIf="descButton">Likes</span>
+      <span id="desc" *ngIf="isDescVisible | async">Likes</span>
     </span>
   </li>
 

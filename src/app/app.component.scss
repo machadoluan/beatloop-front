@@ -5,9 +5,9 @@
 }
 
 .main-content {
-  margin-top: 50px; 
+  margin-top: 50px;
   transition: margin-left 500ms ease-in-out;
-
+  max-width: 1400px;
 }
 
 @media screen and (max-width: 999px) {

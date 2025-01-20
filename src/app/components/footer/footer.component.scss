@@ -59,15 +59,26 @@ footer {
     padding: 0.5rem 0;
 
     .politic {
-      font-size: 10px;
-      color: white;
       display: flex;
       gap: 2rem;
+
+      a {
+        font-size: 10px;
+        color: white;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
 
     .redes-sociais {
       display: flex;
       gap: 0.5rem;
+      svg{
+        &:hover{
+          cursor: pointer;
+        }
+      }
     }
   }
 }

@@ -1,0 +1,18 @@
+<swiper-container init="false" class="triple-slider">
+
+  <swiper-slide class="triple-slider-slide" *ngFor="let banner of banners"
+    [style.background-image]="'url(' + banner.imageUrl + ')'">
+    <div class="content">
+      <h2>{{ banner.title }}</h2>
+      <div class="btns">
+        <button id="subscribe">Subscribe</button>
+        <button id="learn-more">Learn More</button>
+      </div>
+    </div>
+  </swiper-slide>
+</swiper-container>
+
+<div class="custom-pagination">
+  <span *ngFor="let banner of banners; let i = index" [class.active]="i === activeIndex">
+  </span>
+</div>

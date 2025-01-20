@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FooterComponent } from "../../components/footer/footer.component";
+import { CustomSwiperComponent } from "../../components/custom-swiper/custom-swiper.component";
 
 
 @Component({
@@ -16,7 +17,8 @@ import { FooterComponent } from "../../components/footer/footer.component";
     CommonModule,
     PlayMusicComponent,
     MatCheckboxModule,
-    FooterComponent
+    FooterComponent,
+    CustomSwiperComponent
 ],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss'
@@ -27,26 +29,6 @@ export class BrowseComponent implements OnInit, AfterViewInit {
   // ViewsChild
   @ViewChildren('waveformContainer') container!: QueryList<ElementRef>;
   @ViewChildren('cardsContainer') carousels!: QueryList<ElementRef>
-
-  // Banners
-  banners: Banner[] = [
-    {
-      imageUrl: '/img/banner1.jpg',
-      title: 'Os Melhores Samples de Funk para Download',
-    },
-    {
-      imageUrl: '/img/banner2.jpg',
-      title: 'Pacote Exclusivo de Samples para Trap',
-    },
-    {
-      imageUrl: '/img/banner3.jpg',
-      title: 'Samples Profissionais para Música Eletrônica',
-    },
-    {
-      imageUrl: '/img/banner4.jpg',
-      title: 'Loops e Samples para Hip Hop Nacional',
-    }
-  ];
 
   // Banners Offers
   bannersOffers: BannerOffers[] = [
@@ -154,7 +136,6 @@ export class BrowseComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.loadBanners();
   }
 
   ngAfterViewInit(): void {
@@ -191,15 +172,6 @@ export class BrowseComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async loadBanners() {
-    try {
-      // this.banners = await this.service.getBanners().toPromise();
-      // Opcional: iniciar rotação automática
-      this.startAutoRotation();
-    } catch (error) {
-      console.error('Erro ao carregar banners:', error);
-    }
-  }
 
   selectBanner(index: number) {
     this.animationClass = 'fade-out';
@@ -210,15 +182,6 @@ export class BrowseComponent implements OnInit, AfterViewInit {
   }
 
   // Opcional: rotação automática
-  private startAutoRotation() {
-    setInterval(() => {
-      this.animationClass = 'fade-out';
-      setTimeout(() => {
-        this.currentBannerIndex = (this.currentBannerIndex + 1) % this.banners.length;
-        this.animationClass = 'fade-in';
-      }, 500);
-    }, 10000);
-  }
 
   onPlayMusic(card: Card) {
     this.showPlayMusic = true;

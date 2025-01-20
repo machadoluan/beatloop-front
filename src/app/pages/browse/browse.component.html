@@ -1,19 +1,6 @@
 <div class="content">
   <h2>Browser Explorer</h2>
-  <div class="banner" *ngIf="banners.length">
-    <div class="banner-img" [style.background-image]="'url(' + banners[currentBannerIndex].imageUrl + ')'"
-      [ngClass]="animationClass">
-    </div>
-    <div class="banner-content">
-      <span id="title">{{ banners[currentBannerIndex].title }}</span>
-      <div class="banner-indicators">
-        <span *ngFor="let banner of banners; let i = index" class="indicator" [class.active]="i === currentBannerIndex"
-          (click)="selectBanner(i)">
-        </span>
-      </div>
-    </div>
-  </div>
-
+    <app-custom-swiper></app-custom-swiper>
   <section>
     <div class="section-inform">
       <div class="section-title">

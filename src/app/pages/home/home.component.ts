@@ -6,8 +6,7 @@ import { CustomSwiperComponent } from "../../components/custom-swiper/custom-swi
   selector: 'app-home',
   standalone: true,
   imports: [
-    CustomSwiperComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

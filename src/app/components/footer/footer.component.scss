@@ -24,7 +24,7 @@ footer {
       }
 
       #about {
-        width: 50%;
+        width: 80%;
         font-size: 10px;
         color: white;
       }
@@ -35,6 +35,7 @@ footer {
       display: flex;
       justify-content: center;
       gap: 3rem;
+      flex-wrap: wrap;
 
       .links {
         display: flex;
@@ -47,6 +48,35 @@ footer {
         #title {
           font-size: 12px;
           font-weight: bold;
+        }
+      }
+    }
+
+    .links-mobile{
+      display: none;
+      .links{
+        width: 100%;
+        .title{
+          display: flex;
+          justify-content: space-between;
+          // background-color: aliceblue;
+          span{
+            font-size: 14px;
+            font-weight: bold;
+            color: $tertiary-color;
+          }
+        }
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba($color: $card-border-color, $alpha: 0.2);
+        ul{
+          margin: 1.5rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          span{
+            font-size: 12px;
+            color: $tertiary-color;
+          }
         }
       }
     }
@@ -65,7 +95,8 @@ footer {
       a {
         font-size: 10px;
         color: white;
-        &:hover{
+
+        &:hover {
           text-decoration: underline;
         }
       }
@@ -74,9 +105,145 @@ footer {
     .redes-sociais {
       display: flex;
       gap: 0.5rem;
-      svg{
-        &:hover{
+
+      svg {
+        &:hover {
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 700px) {
+  footer {
+    .footer-content {
+      .footer-links {
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  footer {
+    .footer-content {
+      flex-direction: column;
+      gap: 3rem;
+
+      .footer-about {
+        gap: 0.5rem;
+        #about {
+          width: 100%;
+          font-size: 10px;
+          color: white;
+        }
+      }
+
+      .footer-links {
+        display: none;
+      }
+
+      .links-mobile{
+        display: block;
+      }
+
+
+    }
+    .footer-footer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0;
+      gap: 1rem;
+      align-self: center;
+  
+      .politic {
+        display: flex;
+        justify-content: space-between;
+  
+        a {
+          font-size: 10px;
+          color: white;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+  
+      .redes-sociais {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+  
+        svg {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 430px) {
+  footer {
+    .footer-content {
+      flex-direction: column;
+      gap: 3rem;
+
+      .footer-about {
+        gap: 0.5rem;
+        #about {
+          width: 100%;
+          font-size: 10px;
+          color: white;
+        }
+      }
+
+      .footer-links {
+        display: none;
+      }
+
+      .links-mobile{
+        display: block;
+      }
+
+
+    }
+    .footer-footer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 1.2rem 0;
+      gap: 1rem;
+      align-self: center;
+  
+      .politic {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+  
+        a {
+          font-size: 10px;
+          color: white;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+  
+      .redes-sociais {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: start;
+  
+        svg {
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
     }

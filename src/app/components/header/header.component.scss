@@ -6,7 +6,6 @@
   right: 0;
   // width: calc(100% - 210px);
   width: 100%;
-  background-color: $background-color;
   display: flex;
   align-items: center;
   z-index: 99999;
@@ -18,6 +17,7 @@
   z-index: 99999;
   border-bottom: 2px solid #000000;
   background-color: $background-color;
+
 
 
   header {
@@ -33,6 +33,11 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+
+      a{
+       display: flex;
+       justify-content: center;
+      }
 
       img {
         width: 120px;

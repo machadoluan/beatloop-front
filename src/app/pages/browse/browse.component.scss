@@ -1,7 +1,8 @@
 @use '../../../../public/variables' as *;
 
 .content {
-  padding: 2.5rem 5rem 0 5rem;
+  padding: 40px 2.5rem;
+
   border-radius: 30px 0 0 0;
   height: 100%;
 
@@ -172,9 +173,8 @@
     .cards {
       display: flex;
       align-items: center;
-      gap: 20px;
-      overflow-x: scroll;
-      scroll-behavior: smooth;
+      gap: 0.5rem;
+      overflow: scroll;
 
 
       &::-webkit-scrollbar {
@@ -182,14 +182,17 @@
       }
 
       .card {
-        background-color: $background-color;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: start;
         gap: 0.5rem;
         margin-top: 30px;
-        height: 220px;
+        width: 250px !important;
+        // height: 250px;
+        padding: 0.7rem;
+        border-radius: 8px;
+        transition: all 200ms ease-in-out;
 
         .card-img {
           position: relative;
@@ -225,6 +228,8 @@
         }
 
         &:hover {
+          background-color: rgba($color: $card-border-color, $alpha: 0.1);
+
           .card-img {
             .play {
               opacity: 1;
@@ -235,18 +240,21 @@
         .description {
           display: flex;
           flex-direction: column;
-          width: 200px;
 
           #title {
             font-size: 14px;
             font-weight: bold;
             color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
 
           #subtitle {
             font-size: 13px;
             font-weight: normal;
             color: white;
+
           }
         }
 
@@ -521,16 +529,35 @@
 
 
 @media screen and (max-width: 650px) {
+
+
   .content {
-    .one-shots {
-      .one-shots-content {
-        .one-shot-description {
-          flex: 1 !important;
+
+    section {
+      .section-inform {
+        .section-title {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
         }
 
-        .one-shot {
-          .one-shot-music {
-            display: none;
+        .arrows {
+          display: none;
+        }
+      }
+    }
+
+    .one-shots {
+      .one-shots-card {
+        .one-shots-content {
+          .one-shot-description {
+            flex: 1 !important;
+          }
+
+          .one-shot {
+            .one-shot-music {
+              display: none;
+            }
           }
         }
       }
@@ -545,6 +572,18 @@
       .banner-content {
         #title {
           font-size: 1.2rem;
+        }
+      }
+    }
+
+    .one-shots {
+      .one-shots-card {
+        .one-shots-content {
+          .one-shot {
+            .one-shot-music {
+              display: none;
+            }
+          }
         }
       }
     }
@@ -575,6 +614,35 @@
     .next,
     .back {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  section {
+    padding: 40px 0;
+    position: relative;
+
+    .section-inform {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        h2 {
+          color: white;
+          ;
+        }
+
+        .see-all {
+         display: none;
+        }
+      }
     }
   }
 }

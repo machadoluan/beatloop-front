@@ -10,6 +10,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
+import { Toast } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
@@ -20,8 +22,10 @@ import { VerifyEmailComponent } from '../../components/verify-email/verify-email
     MatInputModule,
     MatIconModule,
     ReactiveFormsModule,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    Toast
   ],
+  providers: [MessageService],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss',
   animations: [
@@ -70,7 +74,7 @@ export class CadastroComponent {
   // Formulário reativo do Angular
   cadastroForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private messageService: MessageService) {
     // Inicialização do formulário com validações
     this.cadastroForm = fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]], // Campo obrigatório e mínimo de 3 caracteres
@@ -208,9 +212,9 @@ export class CadastroComponent {
       },
       (error) => {
         if (error = 'Email already exists') {
-          this.errorEmail = 'Email already exists';
+          this.showError('Email already exists');
         } else {
-          this.otherError = error
+          this.showError(error.message)
         }
       }
     )
@@ -237,7 +241,9 @@ export class CadastroComponent {
   }
 
 
-
+  showError(error: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
+  }
 
 
   trocarEmail() {

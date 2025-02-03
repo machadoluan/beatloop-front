@@ -31,7 +31,7 @@ const authConfigGoogle: AuthConfig = {
 
 export class AuthService {
   private currentProvider: 'FACEBOOK' | 'GOOGLE' = 'FACEBOOK';
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'https://backend-beatloop-nest.onrender.com/auth';
 
   constructor(private oauthService: OAuthService, private http: HttpClient, private route: Router) {
     this.configureGoogleAuth();

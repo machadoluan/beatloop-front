@@ -3,11 +3,15 @@ import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { InputOtp } from 'primeng/inputotp';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-verify-email',
   imports: [
     CommonModule,
+    InputOtp,
+    FormsModule
   ],
   templateUrl: './verify-email.component.html',
   styleUrl: './verify-email.component.scss'

@@ -1,10 +1,11 @@
-import { Component, ElementRef, Injectable, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { timeout } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { Toast } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @Injectable({
@@ -13,11 +14,12 @@ import { OAuthService } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, Toast],
+  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   @ViewChildren('inputRef') inputs!: QueryList<ElementRef>;
 
@@ -33,12 +35,15 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private messageService: MessageService
   ) {
     this.userLoginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+  ngOnInit(): void {
   }
 
 
@@ -98,9 +103,13 @@ export class LoginComponent {
         this.router.navigate(['/browse']);
       },
       (error) => {
-        this.messageError = error;
+        this.showError(error.message) 
       }
     )
+  }
+
+  showError(error: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
   }
 
   reenviarCode() {

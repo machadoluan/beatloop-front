@@ -33,28 +33,7 @@
     align-items: center;
     gap: 0.5rem;
 
-    .code {
-      display: flex;
-      gap: 10px;
-
-      .code-input {
-        width: 50px;
-        height: 50px;
-        text-align: center;
-        font-size: 18px;
-        border: 1px solid rgba($primary-color, 0.4);
-        border-radius: 8px;
-        background-color: transparent;
-        outline: none;
-        color: #fff;
-
-        &:focus {
-          border-color: $primary-color;
-          /* Ajuste para a cor principal */
-          box-shadow: 0 0 5px rgba($primary-color, 0.5);
-        }
-      }
-    }
+   
 
     #reenviar {
       cursor: pointer;
@@ -105,5 +84,19 @@
     i {
       font-size: 12px;
     }
+  }
+}
+
+::ng-deep .p-inputotp {
+  .p-inputtext {
+      width: 40px !important;
+      height: 40px !important;
+      background-color: transparent !important;
+      font-size: 12px;
+
+
+      &:enabled:focus {
+          border-color: $primary-color !important;
+      }
   }
 }

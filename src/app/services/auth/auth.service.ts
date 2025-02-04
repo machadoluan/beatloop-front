@@ -17,7 +17,7 @@ const authConfigFacebook: AuthConfig = {
 
 const authConfigGoogle: AuthConfig = {
   issuer: 'https://accounts.google.com',
-  redirectUri: window.location.origin + '/auth/callback',
+  redirectUri: window.location.origin,
   clientId: '1088646860176-dli8cvcdqm4ush61vft5i7u992bscdj5.apps.googleusercontent.com',
   responseType: 'token id_token',
   scope: 'openid profile email',

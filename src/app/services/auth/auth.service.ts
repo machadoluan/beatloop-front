@@ -6,7 +6,7 @@ import { catchError, throwError } from 'rxjs';
 
 const authConfigFacebook: AuthConfig = {
   loginUrl: 'https://www.facebook.com/v11.0/dialog/oauth',
-  redirectUri: window.location.origin + '/auth/callback',
+  redirectUri: window.location.origin,
   clientId: '1527071504600584',
   responseType: 'token',
   scope: 'public_profile email',

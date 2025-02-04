@@ -5,22 +5,8 @@
       {{user.email}}</span></span>
 
   <div class="code-container">
-    <div class="code">
-      <div class="code">
-        <input type="text" maxlength="1" class="code-input" data-index="0" (input)="updateCode($event, codeInput2)"
-          #codeInput1 />
-        <input type="text" maxlength="1" class="code-input" data-index="1" (input)="updateCode($event, codeInput3)"
-          #codeInput2 />
-        <input type="text" maxlength="1" class="code-input" data-index="2" (input)="updateCode($event, codeInput4)"
-          #codeInput3 />
-        <input type="text" maxlength="1" class="code-input" data-index="3" (input)="updateCode($event, codeInput5)"
-          #codeInput4 />
-        <input type="text" maxlength="1" class="code-input" data-index="3" (input)="updateCode($event, codeInput6)"
-          #codeInput5 />
-        <input type="text" maxlength="1" class="code-input" data-index="3" (input)="updateCode($event, null)"
-          #codeInput6 />
-      </div>
-
+    <div class="codes">
+      <p-inputotp [(ngModel)]="code" size="large" [length]=6 />
     </div>
     <span>Você poderá reenviar o codigo em {{getFormattedTime()}}</span>
     <span id="reenviar" (click)="reenviar ? reenviarCode() : null" [ngClass]="{'disabled': !reenviar}">Reenviar</span>

@@ -26,20 +26,19 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'auth/callback',
-    component: AuthCallbackComponent
-  },
-  {
     path: 'browse',
-    component: BrowseComponent
+    component: BrowseComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'packs',
-    component: SamplesPacksComponent
+    component: SamplesPacksComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'one-shots',
-    component: OneShotsComponent
+    component: OneShotsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'signup',

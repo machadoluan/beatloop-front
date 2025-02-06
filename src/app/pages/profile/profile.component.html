@@ -1,115 +1,60 @@
-<div class="container">
-  <div class="banner">
-    <div class="banner-img-container">
-      <div class="icon-container">
-        <label for="file-upload-banner"><i class="fa-solid fa-camera"></i></label>
-        <input type="file" id="file-upload-banner" (change)="onFileChangeBanner($event)" style="display: none;">
-      </div>
-    </div>
-    <div class="banner-img" [ngStyle]="{'background-image': 'url(' + formData.banner + ')'}">
-    </div>
-    <!-- <div class="banner-img">
-    </div> -->
-  </div>
-
+<div class="container-profile">
   <div class="profile">
-    <div class="logo">
-      <img [src]="user.photo" alt="">
-    </div>
-    <div class="main-info">
-      <span id="name">{{user.name}}</span>
+    <div class="profile-dados">
+      <div class="photo">
+        <img [src]="user.photo" alt="">
+      </div>
+      <span>{{user.name}}</span>
       <span id="email">{{user.email}}</span>
     </div>
-    <div class="dados">
-      <div class="name colunm-dados">
-        <div class="title">Name</div>
-        <div class="form-group" [ngClass]="[toggleEdit ? 'edit-mode' : 'edit-mode-disabled']">
-          <input type="text" [(ngModel)]="formData.name" (input)="onInputChange()" [disabled]="!toggleEdit">
 
-        </div>
+    <div class="profile-menu">
+      <div class="menu" [ngClass]="{ active: selectedMenu === 'likes' }" (click)="selectMenu('likes')">
+        <i class="fa fa-heart"></i>
+        My likes
       </div>
-      <div class="email colunm-dados">
-        <div class="title">E-mail</div>
-        <div class="form-group" [ngClass]="[toggleEdit ? 'edit-mode' : 'edit-mode-disabled']">
-          <i class="fa-regular fa-envelope"></i>
-          <input type="email" [(ngModel)]="formData.email" (input)="onInputChange()" [disabled]="!toggleEdit">
-
-        </div>
+      <div class="menu" [ngClass]="{ active: selectedMenu === 'downloads' }" (click)="selectMenu('downloads')">
+        <i class="fa fa-download"></i>
+        Downloads
       </div>
-      <div class="photo colunm-dados">
-        <div class="title">Photo</div>
-        <div class="photo-group">
-          <img [src]="formData.photo" alt="">
-          <label for="file-upload" class="custom-file-upload"
-            [ngClass]="[toggleEdit ? 'edit-mode' : 'edit-mode-disabled']">
-            Change
-          </label>
-          <input type="file" id="file-upload" (change)="onFileChange($event)" style="display: none;"
-            [disabled]="!toggleEdit">
-          <span (click)="onRemovePhoto()" *ngIf="toggleEdit" id="remove-photo"
-            [ngClass]="[toggleEdit ? 'edit-mode' : 'edit-mode-disabled']">Remove</span>
-        </div>
+      <div class="menu" [ngClass]="{ active: selectedMenu === 'billing' }" (click)="selectMenu('billing')">
+        <i class="fa fa-dollar"></i>
+        Plan & Billing
       </div>
-      <div class="btns colunm-dados">
-        <button (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-        <button (click)="editDados()" *ngIf="!toggleEdit"><i class="fa-solid fa-pen-to-square"></i> Edit
-          Profile</button>
-
-        <div class="btn-infos" [ngClass]="[animationClass, toggleBtns ? 'd-flex' : 'd-none']">
-          <button id="cancel" (click)="onCancel()">Cancel</button>
-          <button id="save" (click)="onSave()">Save changes</button>
-        </div>
+      <div class="menu" [ngClass]="{ active: selectedMenu === 'help' }" (click)="selectMenu('help')">
+        <i class="fa fa-info"></i>
+        Help
+      </div>
+      <div class="menu" [ngClass]="{ active: selectedMenu === 'devices' }" (click)="selectMenu('devices')">
+        <i class="fa fa-tv"></i>
+        My devices
+      </div>
+      <div class="menu" [ngClass]="{ active: selectedMenu === 'videos' }" (click)="selectMenu('videos')">
+        <i class="fa fa-youtube"></i>
+        Videos
+      </div>
+      <div class="menu settings" [ngClass]="{ active: selectedMenu === 'settings' }" (click)="selectMenu('settings')">
+        <i class="fa fa-gear"></i>
+        Settings
+      </div>
+      <div class="menu logout" (click)="confirm1($event)">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
       </div>
     </div>
+
   </div>
-
-  <div class="subscription-section">
-    <h1>My subscription</h1>
-
-    <div class="subscription-card">
-      <div class="subscription-header">
-        <h2>Sound +</h2>
-        <span class="management-badge">Subscription Management</span>
-      </div>
-
-      <div class="subscription-content">
-
-        <div class="features">
-          <div class="feature-item">
-            <i class="fa-solid fa-check"></i>
-            <span>Lorem Ipsum is simply dummy text.</span>
-          </div>
-          <div class="feature-item">
-            <i class="fa-solid fa-check"></i>
-            <span>Lorem Ipsum is simply dummy text.</span>
-          </div>
-          <div class="feature-item">
-            <i class="fa-solid fa-check"></i>
-            <span>Lorem Ipsum is simply dummy text.</span>
-          </div>
-          <div class="feature-item">
-            <i class="fa-solid fa-check"></i>
-            <span>Lorem Ipsum is simply dummy text.</span>
-          </div>
-          <div class="feature-item">
-            <i class="fa-solid fa-check"></i>
-            <span>Lorem Ipsum is simply dummy text.</span>
-          </div>
-          <div class="feature-item">
-            <i class="fa-solid fa-check"></i>
-            <span>Lorem Ipsum is simply dummy text.</span>
-          </div>
-        </div>
-
-        <div class="download-progress">
-          <div class="progress-circle">
-            <i class="fa-solid fa-download"></i>
-            <span>10/100</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="profile-content">
+    <div *ngIf="selectedMenu === 'likes'">Content for My Likes</div>
+    <div *ngIf="selectedMenu === 'downloads'">Content for Downloads</div>
+    <div *ngIf="selectedMenu === 'billing'">Content for Plan & Billing</div>
+    <div *ngIf="selectedMenu === 'help'">Content for Help</div>
+    <div *ngIf="selectedMenu === 'devices'">Content for My Devices</div>
+    <div *ngIf="selectedMenu === 'videos'">Content for Videos</div>
+    <div *ngIf="selectedMenu === 'settings'">Content for Settings</div>
   </div>
 </div>
 
-<app-verify-email *ngIf="showConfirmationCode"></app-verify-email>
+
+
+<p-confirmdialog />

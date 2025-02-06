@@ -3,18 +3,22 @@ import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, VerifyEmailComponent],
+  imports: [CommonModule, FormsModule, VerifyEmailComponent, ConfirmDialog],
+  providers: [ConfirmationService],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private confirmationService: ConfirmationService
   ) { }
 
   user: any;
@@ -22,6 +26,8 @@ export class ProfileComponent implements OnInit {
   toggleBtns: boolean = false;
   toggleEdit: boolean = false;
   showConfirmationCode: boolean = false;
+  selectedMenu: string = 'likes';
+
   formData = {
     id: '',
     name: '',
@@ -211,4 +217,29 @@ export class ProfileComponent implements OnInit {
     this.authService.logout()
   }
 
+  selectMenu(menu: string){
+    this.selectedMenu = menu
+  }
+
+  confirm1(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Do you really want to log out?',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-sign-out',
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Save',
+      },
+      accept: () => {
+       this.authService.logout();
+      },
+    });
+  }
 }

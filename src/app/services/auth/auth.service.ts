@@ -31,7 +31,7 @@ const authConfigGoogle: AuthConfig = {
 
 export class AuthService {
   private currentProvider: 'FACEBOOK' | 'GOOGLE' = 'FACEBOOK';
-  private apiUrl = 'https://backend-beatloop-nest.onrender.com/auth';
+  private apiUrl = 'http://localhost:3000/auth';
 
   constructor(private oauthService: OAuthService, private http: HttpClient, private route: Router) {
     this.configureGoogleAuth();
@@ -122,7 +122,7 @@ export class AuthService {
         errorMessage = 'Email already exists';
       } else {
         errorMessage = error.error.message;
-        console.log(errorMessage)
+        console.log(error)
       }
     }
 

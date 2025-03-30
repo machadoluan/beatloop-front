@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [NoAuthGuard]
+    // canActivate: [NoAuthGuard]
   },
   {
     path: 'home',
@@ -28,26 +28,30 @@ export const routes: Routes = [
   {
     path: 'browse',
     component: BrowseComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'packs',
     component: SamplesPacksComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'one-shots',
     component: OneShotsComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'signup',
     component: CadastroComponent,
-    canActivate: [NoAuthGuard]
+    // canActivate: [NoAuthGuard]
   },
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'auth-callback',
+    component: AuthCallbackComponent
   },
   {
     path: '**',

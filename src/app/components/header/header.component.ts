@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
         label: 'Save',
       },
       accept: () => {
-       this.authService.logout();
+        this.authService.logout();
       },
     });
   }

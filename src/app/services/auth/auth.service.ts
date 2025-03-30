@@ -4,78 +4,23 @@ import { Router } from '@angular/router';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { catchError, throwError } from 'rxjs';
 
-const authConfigFacebook: AuthConfig = {
-  loginUrl: 'https://www.facebook.com/v11.0/dialog/oauth',
-  redirectUri: window.location.origin,
-  clientId: '1527071504600584',
-  responseType: 'token',
-  scope: 'public_profile email',
-  oidc: false,
-  strictDiscoveryDocumentValidation: false,
-  showDebugInformation: true
-};
-
-const authConfigGoogle: AuthConfig = {
-  issuer: 'https://accounts.google.com',
-  redirectUri: `${window.location.origin}/`,
-  clientId: '1088646860176-dli8cvcdqm4ush61vft5i7u992bscdj5.apps.googleusercontent.com',
-  responseType: 'token id_token',
-  scope: 'openid profile email',
-  showDebugInformation: true,
-  strictDiscoveryDocumentValidation: false
-};
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private currentProvider: 'FACEBOOK' | 'GOOGLE' = 'FACEBOOK';
-  private apiUrl = 'http://localhost:3000/auth';
 
-  constructor(private oauthService: OAuthService, private http: HttpClient, private route: Router) {
-    this.configureGoogleAuth();
-  }
+  private apiUrl = 'http://localhost:3000/auth'
 
-  private configureFacebookAuth() {
-    this.currentProvider = 'FACEBOOK';
-    this.oauthService.configure(authConfigFacebook);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
+  constructor(private http: HttpClient, private route: Router) {
 
-  private configureGoogleAuth() {
-    this.currentProvider = 'GOOGLE';
-    this.oauthService.configure(authConfigGoogle);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
   loginWithFacebook() {
-    this.configureFacebookAuth();
-    this.oauthService.initImplicitFlow();
   }
 
   loginWithGoogle() {
-    this.configureGoogleAuth();
-
-    // Inicia o fluxo de login com Google
-    this.oauthService.initLoginFlow();
-  }
-  sendTokenToBackend(token: string) {
-    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/google`, { token }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  handleLoginCallback() {
-    this.oauthService.tryLogin().then(() => {
-      if (this.oauthService.hasValidAccessToken()) {
-        this.route.navigate(['/browse']);
-      } else {
-        console.error('Falha na autenticação');
-      }
-    }).catch((error) => {
-      console.error('Erro durante o callback da autenticação:', error);
-    });
   }
 
   login(dadosLogin: any) {

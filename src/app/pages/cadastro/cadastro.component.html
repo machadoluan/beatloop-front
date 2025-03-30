@@ -16,11 +16,11 @@
     <div class="signup">
 
       <div class="login-social" [ngClass]="[animationClass, loginSocial ? 'd-flex' : 'd-none']">
-        <div class="social">
+        <div class="social" (click)="loginWithGoogle()">
           <img src="/img/google_icon.png" alt="Google">
           Continue with Google
         </div>
-        <div class="social">
+        <div class="social" (click)="loginWithFacebook()">
           <img src="/img/facebook_icon.svg" alt="Facebook">
           Continue with Facebook
         </div>

@@ -250,4 +250,12 @@ export class CadastroComponent {
     this.code = '';
     this.showConfirmationCode = false;
   }
+
+  loginWithGoogle() {
+    // this.authService.loginWithGoogle();
+  }
+
+  loginWithFacebook() {
+    // this.authService.loginWithFacebook();
+  }
 }
